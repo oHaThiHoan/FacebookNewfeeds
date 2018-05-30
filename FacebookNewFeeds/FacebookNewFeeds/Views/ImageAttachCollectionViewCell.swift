@@ -11,10 +11,19 @@ import UIKit
 class ImageAttachCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var restOfImageAttachLabel: UILabel!
+    @IBOutlet weak var attachImageView: UIImageView!
+
+    public func setContent(imageUrl: String) {
+        attachImageView.setImageFromStringURL(stringURL: imageUrl)
+    }
 
     public func setRestOfImageAttach(number: Int) {
-        restOfImageAttachLabel.isHidden = false
-        restOfImageAttachLabel.text = "+" + String(number)
+        if number == 0 {
+            restOfImageAttachLabel.isHidden = true
+        } else {
+            restOfImageAttachLabel.isHidden = false
+            restOfImageAttachLabel.text = "+" + String(number)
+        }
     }
 
 }

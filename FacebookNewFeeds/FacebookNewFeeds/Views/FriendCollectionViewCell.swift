@@ -18,4 +18,10 @@ class FriendCollectionViewCell: UICollectionViewCell {
         avatarImageView.clipsToBounds = true
     }
 
+    public func setContent(storyModel: StoryModel) {
+        if let stringURL = storyModel.storyImageUrl {
+            avatarImageView.setImageFromStringURL(stringURL: stringURL)
+        }
+    }
+
 }

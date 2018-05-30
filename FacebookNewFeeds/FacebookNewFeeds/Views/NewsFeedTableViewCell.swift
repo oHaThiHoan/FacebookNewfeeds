@@ -12,13 +12,26 @@ private struct Constants {
     public static let imageAttachCollectionViewCellNibName = "ImageAttachCollectionViewCell"
     public static let imageAttachCollectionViewCellIdentifier = "ImageAttachCollectionViewCell"
     public static let heightCollectionView = 150
+    public static let heightFeedContent = 50
+    public static let visibleModePublic = "public"
+    public static let visibleModeFriends = "friends"
 }
 
 class NewsFeedTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imageCollectionView: UICollectionView!
     @IBOutlet weak var heightImageAttachCollectionView: NSLayoutConstraint!
-    let numberImageAttach = 7
+    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var fullNameLabel: UILabel!
+    @IBOutlet weak var createAtDateLabel: UILabel!
+    @IBOutlet weak var visibleModeImageView: UIImageView!
+    @IBOutlet weak var reactionCountLabel: UILabel!
+    @IBOutlet weak var shareCountLabel: UILabel!
+    @IBOutlet weak var commentCountLabel: UILabel!
+    @IBOutlet weak var feedContentTextView: UITextView!
+    @IBOutlet weak var feedContentHeightConstraint: NSLayoutConstraint!
+    var numberImageAttach = 0
+    var feedModel = FeedModel()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,11 +39,38 @@ class NewsFeedTableViewCell: UITableViewCell {
         imageCollectionView.dataSource = self
         imageCollectionView.register(UINib.init(nibName: Constants.imageAttachCollectionViewCellNibName, bundle: nil),
                                      forCellWithReuseIdentifier: Constants.imageAttachCollectionViewCellIdentifier)
+        feedContentTextView.textContainer.lineBreakMode = .byTruncatingTail
     }
 
-    public func setContent() {
+    public func setContent(feedModel: FeedModel) {
+        self.feedModel = feedModel
+        if let avatarUrl = feedModel.avatarURL {
+            avatarImageView.setImageFromStringURL(stringURL: avatarUrl)
+        }
+        fullNameLabel.text = feedModel.fullName
+        if feedModel.visibleMode == Constants.visibleModePublic {
+            visibleModeImageView.image = UIImage(named: "ic-public")
+        } else if feedModel.visibleMode == Constants.visibleModeFriends {
+            visibleModeImageView.image = UIImage(named: "ic-friends")
+        }
+        createAtDateLabel.text = feedModel.createAt
+        if feedModel.feedContent == "" {
+            feedContentHeightConstraint.constant = 0
+        } else {
+            feedContentHeightConstraint.constant = CGFloat(Constants.heightFeedContent)
+        }
+        feedContentTextView.text = feedModel.feedContent
+        reactionCountLabel.text = String(feedModel.reactionCount)
+        commentCountLabel.text = String(feedModel.commentCount) + " Comments"
+        shareCountLabel.text = String(feedModel.sharingCount) + " Shares"
+        if let feedImages = feedModel.feedImages {
+            numberImageAttach = feedImages.count
+        }
         if numberImageAttach == 0 {
             heightImageAttachCollectionView.constant = 0
+        } else {
+            heightImageAttachCollectionView.constant = CGFloat(Constants.heightCollectionView)
+            imageCollectionView.reloadData()
         }
     }
 
@@ -39,18 +79,26 @@ class NewsFeedTableViewCell: UITableViewCell {
 extension NewsFeedTableViewCell: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return numberImageAttach
+        guard let feedImages = feedModel.feedImages else {
+            return 0
+        }
+        return feedImages.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-            Constants.imageAttachCollectionViewCellIdentifier, for: indexPath) as? ImageAttachCollectionViewCell else {
-                return UICollectionViewCell()
+            Constants.imageAttachCollectionViewCellIdentifier, for: indexPath) as? ImageAttachCollectionViewCell,
+            let feedImages = feedModel.feedImages else {
+            return UICollectionViewCell()
         }
+        let attachImageURL = feedImages[indexPath.row]
+        cell.setContent(imageUrl: attachImageURL)
         if indexPath.row == 3 && numberImageAttach > 4 {
             let restOfImageAttach = numberImageAttach - 4
             cell.setRestOfImageAttach(number: restOfImageAttach)
+        } else {
+            cell.setRestOfImageAttach(number: 0)
         }
         return cell
     }

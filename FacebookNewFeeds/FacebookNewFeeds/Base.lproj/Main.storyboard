@@ -162,26 +162,58 @@
             </objects>
             <point key="canvasLocation" x="76" y="-116"/>
         </scene>
-        <!--New Feeds View Controller-->
+        <!--News Feeds View Controller-->
         <scene sceneID="Ifa-ES-6bN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ByA-Cv-pUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="eg2-Vf-t0S" customClass="NewFeedsViewController" customModule="FacebookNewFeeds" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="eg2-Vf-t0S" customClass="NewsFeedsViewController" customModule="FacebookNewFeeds" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Iuz-av-mCT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="niY-4r-DdJ">
+                                <rect key="frame" x="0.0" y="64" width="375" height="66"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="8hH-Hc-lEa"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zfs-9l-ZRL">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nQg-Hx-gu6">
+                                <rect key="frame" x="0.0" y="135" width="375" height="483"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="nQg-Hx-gu6" firstAttribute="top" secondItem="niY-4r-DdJ" secondAttribute="bottom" constant="5" id="Axg-O7-VP7"/>
+                            <constraint firstItem="niY-4r-DdJ" firstAttribute="top" secondItem="1ng-Ab-Xet" secondAttribute="top" id="M2y-RT-BhV"/>
+                            <constraint firstItem="niY-4r-DdJ" firstAttribute="leading" secondItem="1ng-Ab-Xet" secondAttribute="leading" id="S9z-o1-0RE"/>
+                            <constraint firstItem="1ng-Ab-Xet" firstAttribute="trailing" secondItem="nQg-Hx-gu6" secondAttribute="trailing" id="ZFl-z2-UZr"/>
+                            <constraint firstItem="1ng-Ab-Xet" firstAttribute="trailing" secondItem="niY-4r-DdJ" secondAttribute="trailing" id="dLt-FX-HC6"/>
+                            <constraint firstItem="nQg-Hx-gu6" firstAttribute="leading" secondItem="1ng-Ab-Xet" secondAttribute="leading" id="nsM-J5-9At"/>
+                            <constraint firstItem="1ng-Ab-Xet" firstAttribute="bottom" secondItem="nQg-Hx-gu6" secondAttribute="bottom" id="zMp-Vz-RBN"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="1ng-Ab-Xet"/>
                     </view>
                     <navigationItem key="navigationItem" id="kji-OC-mbS"/>
+                    <connections>
+                        <outlet property="friendsCollectionView" destination="niY-4r-DdJ" id="qPZ-hU-KAe"/>
+                        <outlet property="newsFeedTableView" destination="nQg-Hx-gu6" id="XC4-yo-bHb"/>
+                    </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ByA-Cv-pUk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1816.8" y="610.34482758620697"/>
         </scene>
         <!--Tabbar View Controller-->
         <scene sceneID="oIS-VM-VCq">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4D8-zW-XiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Uj5-2m-991" customClass="TabbarViewController" customModule="FacebookNewFeeds" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BRF-tb-G8I">
@@ -193,6 +225,7 @@
                         <segue destination="Wgq-ph-Plb" kind="relationship" relationship="viewControllers" id="eR1-Q1-L5s"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4D8-zW-XiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="879" y="-116"/>
         </scene>
