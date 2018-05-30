@@ -30,5 +30,5 @@ class NewFeedsNavigationView: UIView {
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.backgroundColor = .blue
     }
-    
+
 }
