@@ -14,6 +14,8 @@
 		579F13AB20BBF00F00FC9F13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F13A920BBF00F00FC9F13 /* LaunchScreen.storyboard */; };
 		579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F13CE20BBF66600FC9F13 /* SignInViewController.swift */; };
 		579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F13D020BC05C600FC9F13 /* RegisterViewController.swift */; };
+		57C0D28D20BD48810049B51A /* NewFeedsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C0D28C20BD48810049B51A /* NewFeedsNavigationView.swift */; };
+		57C0D29120BD4A210049B51A /* NewFeedsNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C0D29020BD4A210049B51A /* NewFeedsNavigationView.xib */; };
 		E6AE7B0205A8020F8E1E9CCF /* Pods_FacebookNewFeeds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		579F13BC20BBF00F00FC9F13 /* FacebookNewFeedsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookNewFeedsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F13CE20BBF66600FC9F13 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		579F13D020BC05C600FC9F13 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		57C0D28C20BD48810049B51A /* NewFeedsNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedsNavigationView.swift; sourceTree = "<group>"; };
+		57C0D29020BD4A210049B51A /* NewFeedsNavigationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewFeedsNavigationView.xib; sourceTree = "<group>"; };
 		63766150D209A8B7C7BF6F5E /* Pods_FacebookNewFeedsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeedsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7FA8B05DE973186D7A7878A /* Pods-FacebookNewFeeds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FacebookNewFeeds.release.xcconfig"; path = "Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,6 +115,7 @@
 		579F139F20BBF00700FC9F13 /* FacebookNewFeeds */ = {
 			isa = PBXGroup;
 			children = (
+				57C0D28B20BD48590049B51A /* Views */,
 				579F13A020BBF00700FC9F13 /* AppDelegate.swift */,
 				579F13A420BBF00700FC9F13 /* Main.storyboard */,
 				579F13A720BBF00F00FC9F13 /* Assets.xcassets */,
@@ -121,6 +126,15 @@
 				5725743420BD26190065D667 /* NewFeedsViewController.swift */,
 			);
 			path = FacebookNewFeeds;
+			sourceTree = "<group>";
+		};
+		57C0D28B20BD48590049B51A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				57C0D28C20BD48810049B51A /* NewFeedsNavigationView.swift */,
+				57C0D29020BD4A210049B51A /* NewFeedsNavigationView.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		BEE7766E2950CC36EC78E6A2 /* Frameworks */ = {
@@ -242,6 +256,7 @@
 				579F13AB20BBF00F00FC9F13 /* LaunchScreen.storyboard in Resources */,
 				579F13A820BBF00F00FC9F13 /* Assets.xcassets in Resources */,
 				579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */,
+				57C0D29120BD4A210049B51A /* NewFeedsNavigationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57C0D28D20BD48810049B51A /* NewFeedsNavigationView.swift in Sources */,
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
 				579F13A120BBF00700FC9F13 /* AppDelegate.swift in Sources */,
 				579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */,

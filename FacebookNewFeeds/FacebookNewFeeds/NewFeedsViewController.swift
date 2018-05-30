@@ -12,5 +12,16 @@ class NewFeedsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpNavigationBarItems()
     }
+
+    private func setUpNavigationBarItems() {
+        let searchBar = UISearchBar.init(frame: .zero)
+        let leftBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "camera"), style: .plain, target: nil, action: nil)
+          let rightBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "message"), style: .plain, target: nil, action: nil)
+        navigationItem.titleView = searchBar
+        navigationItem.leftBarButtonItem = leftBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+
 }
