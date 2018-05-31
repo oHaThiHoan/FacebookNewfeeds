@@ -30,9 +30,9 @@ class SignInViewController: UIViewController {
     }
 
     @IBAction func signInAction(_ sender: Any) {
-        if accountNameTextField.text == "hoanht" && passwordTextField.text == "123" {
+       // if accountNameTextField.text == "hoanht" && passwordTextField.text == "123" {
             performSegue(withIdentifier: Constants.goToMainSegue, sender: nil)
-        }
+       // }
     }
 
     @objc func registerAction() {
