@@ -10,16 +10,19 @@ import UIKit
 
 class FeedModel: NSObject {
 
-    var fullName: String = ""
+    var fullName: String?
     var avatarURL: String?
-    var createAt: String = ""
-    var feedContent: String = ""
-    var visibleMode: String = ""
-    var reactionCount: Int = 0
-    var commentCount: Int = 0
-    var sharingCount: Int = 0
-    var feedImages = [String]()
+    var createAt: String?
+    var feedContent: String?
+    var visibleMode: String?
+    var reactionCount = 0
+    var commentCount = 0
+    var sharingCount = 0
+    var feedImages: [String]?
 
+    override init() {
+        super.init()
+    }
     init(response: [String: Any]) {
         super.init()
         if let fullName = response["fullName"] as? String {
@@ -27,7 +30,8 @@ class FeedModel: NSObject {
         }
         avatarURL = response["avatarUrl"] as? String
         if let createAt = response["createAt"] as? String {
-            self.createAt = createAt
+            self.createAt = Date.dateFromString(string: createAt,
+                format: "yyyy-MM-dd'T'hh:mm:ss'Z'").toString(dateFormat: "MMM d, h:mm a")
         }
         if let feedContent = response["feedContent"] as? String {
             self.feedContent = feedContent

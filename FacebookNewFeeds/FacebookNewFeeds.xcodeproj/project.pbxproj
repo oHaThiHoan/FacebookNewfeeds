@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		572E8D9720BF8F0A0067B2D3 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 572E8D9620BF8F0A0067B2D3 /* UIImageView.swift */; };
 		5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734844320BEBA66005CE11F /* NewsFeedsViewController.swift */; };
 		5734844920BEBA74005CE11F /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734844620BEBA74005CE11F /* FeedModel.swift */; };
 		5734844A20BEBA74005CE11F /* QueryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734844820BEBA74005CE11F /* QueryService.swift */; };
@@ -22,8 +23,9 @@
 		579F13AB20BBF00F00FC9F13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F13A920BBF00F00FC9F13 /* LaunchScreen.storyboard */; };
 		579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F13CE20BBF66600FC9F13 /* SignInViewController.swift */; };
 		579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F13D020BC05C600FC9F13 /* RegisterViewController.swift */; };
-		57C0D28D20BD48810049B51A /* NewFeedsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57C0D28C20BD48810049B51A /* NewFeedsNavigationView.swift */; };
-		57C0D29120BD4A210049B51A /* NewFeedsNavigationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57C0D29020BD4A210049B51A /* NewFeedsNavigationView.xib */; };
+		57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B320BFD06E002880C2 /* UIViewController.swift */; };
+		57CB61B620BFE9EF002880C2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B520BFE9EF002880C2 /* Date.swift */; };
+		57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B720BFEFC9002880C2 /* StoryModel.swift */; };
 		E6AE7B0205A8020F8E1E9CCF /* Pods_FacebookNewFeeds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,7 @@
 		0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeeds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		16CE680084F53EFCAC7C34B7 /* Pods_FacebookNewFeedsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeedsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3072659C441CB8A79A5F9DC3 /* Pods-FacebookNewFeeds.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FacebookNewFeeds.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds.debug.xcconfig"; sourceTree = "<group>"; };
+		572E8D9620BF8F0A0067B2D3 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		5734844320BEBA66005CE11F /* NewsFeedsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsFeedsViewController.swift; sourceTree = "<group>"; };
 		5734844620BEBA74005CE11F /* FeedModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		5734844820BEBA74005CE11F /* QueryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueryService.swift; sourceTree = "<group>"; };
@@ -67,8 +70,9 @@
 		579F13BC20BBF00F00FC9F13 /* FacebookNewFeedsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookNewFeedsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F13CE20BBF66600FC9F13 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		579F13D020BC05C600FC9F13 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
-		57C0D28C20BD48810049B51A /* NewFeedsNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewFeedsNavigationView.swift; sourceTree = "<group>"; };
-		57C0D29020BD4A210049B51A /* NewFeedsNavigationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewFeedsNavigationView.xib; sourceTree = "<group>"; };
+		57CB61B320BFD06E002880C2 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		57CB61B520BFE9EF002880C2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		57CB61B720BFEFC9002880C2 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
 		63766150D209A8B7C7BF6F5E /* Pods_FacebookNewFeedsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeedsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7FA8B05DE973186D7A7878A /* Pods-FacebookNewFeeds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FacebookNewFeeds.release.xcconfig"; path = "Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,10 +112,21 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		572E8D9320BF8DD90067B2D3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				572E8D9620BF8F0A0067B2D3 /* UIImageView.swift */,
+				57CB61B320BFD06E002880C2 /* UIViewController.swift */,
+				57CB61B520BFE9EF002880C2 /* Date.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5734844520BEBA74005CE11F /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				5734844620BEBA74005CE11F /* FeedModel.swift */,
+				57CB61B720BFEFC9002880C2 /* StoryModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -147,6 +162,7 @@
 		579F139F20BBF00700FC9F13 /* FacebookNewFeeds */ = {
 			isa = PBXGroup;
 			children = (
+				572E8D9320BF8DD90067B2D3 /* Extensions */,
 				5734844520BEBA74005CE11F /* Models */,
 				5734844720BEBA74005CE11F /* Network */,
 				57C0D28B20BD48590049B51A /* Views */,
@@ -171,8 +187,6 @@
 				5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */,
 				5734844D20BEBAAA005CE11F /* NewsFeedTableViewCell.swift */,
 				5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */,
-				57C0D28C20BD48810049B51A /* NewFeedsNavigationView.swift */,
-				57C0D29020BD4A210049B51A /* NewFeedsNavigationView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -298,7 +312,6 @@
 				579F13AB20BBF00F00FC9F13 /* LaunchScreen.storyboard in Resources */,
 				579F13A820BBF00F00FC9F13 /* Assets.xcassets in Resources */,
 				579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */,
-				57C0D29120BD4A210049B51A /* NewFeedsNavigationView.xib in Resources */,
 				5734845420BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib in Resources */,
 				5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */,
 			);
@@ -342,10 +355,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -377,16 +392,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				57C0D28D20BD48810049B51A /* NewFeedsNavigationView.swift in Sources */,
 				5734844920BEBA74005CE11F /* FeedModel.swift in Sources */,
+				572E8D9720BF8F0A0067B2D3 /* UIImageView.swift in Sources */,
 				5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */,
+				57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */,
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
 				5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */,
 				5734844A20BEBA74005CE11F /* QueryService.swift in Sources */,
+				57CB61B620BFE9EF002880C2 /* Date.swift in Sources */,
 				5734845320BEBAAA005CE11F /* NewsFeedTableViewCell.swift in Sources */,
 				5734845220BEBAAA005CE11F /* ImageAttachCollectionViewCell.swift in Sources */,
 				579F13A120BBF00700FC9F13 /* AppDelegate.swift in Sources */,
 				579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */,
+				57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
