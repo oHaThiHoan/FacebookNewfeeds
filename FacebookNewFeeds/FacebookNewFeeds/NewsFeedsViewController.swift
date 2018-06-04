@@ -15,14 +15,15 @@ private struct Constants {
     public static let newsFeedTableViewCellIdentifier = "NewsFeedTableViewCell"
     public static let url = "https://www.mocky.io/v2/5b0ce0cb3300005100b400f1"
     public static let profileViewControllerIdentifier = "ProfileViewController"
+    public static let colorSearchBarBackground = "#2E4780"
 }
 
 class NewsFeedsViewController: UIViewController {
 
     @IBOutlet weak var friendsCollectionView: UICollectionView!
     @IBOutlet weak var newsFeedTableView: UITableView!
-    var feedsArray = [FeedModel]()
-    var storyArray = [StoryModel]()
+    var feedsArray: [FeedModel] = []
+    var storyArray: [StoryModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,18 +59,20 @@ class NewsFeedsViewController: UIViewController {
         }
     }
 
-        private func setUpNavigationBarItems() {
-            let searchBar = UISearchBar.init(frame: .zero)
-            let leftBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "camera"),
-                                                     style: .done, target: nil, action: nil)
-            let rightBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "message"),
-                                                      style: .done, target: nil, action: nil)
-            leftBarButton.tintColor = .white
-            rightBarButton.tintColor = .white
-            navigationItem.titleView = searchBar
-            navigationItem.leftBarButtonItem = leftBarButton
-            navigationItem.rightBarButtonItem = rightBarButton
-        }
+    private func setUpNavigationBarItems() {
+        let searchBar = UISearchBar(frame: .zero, textFieldPlaceHolder: "Search",
+            textFieldBackground: UIColor(hexString: Constants.colorSearchBarBackground), textFieldColor: .white)
+        let leftBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "camera"),
+            style: .done, target: nil, action: nil)
+        let rightBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "message"),
+            style: .done, target: nil, action: nil)
+        leftBarButton.tintColor = .white
+        rightBarButton.tintColor = .white
+        navigationItem.titleView = searchBar
+        navigationItem.leftBarButtonItem = leftBarButton
+        navigationItem.rightBarButtonItem = rightBarButton
+    }
+
 }
 
 extension NewsFeedsViewController: UICollectionViewDataSource {

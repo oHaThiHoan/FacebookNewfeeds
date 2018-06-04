@@ -12,6 +12,7 @@ private struct Constants {
     public static let newsFeedTableViewCellNibName = "NewsFeedTableViewCell"
     public static let newsFeedTableViewCellIdentifier = "NewsFeedTableViewCell"
     public static let profileUrl = "https://www.mocky.io/v2/5b1111622f0000700034f21e"
+    public static let colorSearchBarBackground = "#2E4780"
 }
 
 class ProfileViewController: UIViewController {
@@ -62,7 +63,8 @@ class ProfileViewController: UIViewController {
     }
 
     private func setNavigationItem() {
-        let searchBar = UISearchBar.init(frame: .zero)
+        let searchBar = UISearchBar(frame: .zero, textFieldPlaceHolder: "Search",
+            textFieldBackground: UIColor(hexString: Constants.colorSearchBarBackground ), textFieldColor: .white)
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "message"),
             style: .done, target: nil, action: nil)
         rightBarButton.tintColor = .white

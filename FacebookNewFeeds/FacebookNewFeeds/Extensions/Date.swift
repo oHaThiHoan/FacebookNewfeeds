@@ -25,4 +25,23 @@ extension Date {
         return dateFormatter.string(from: self)
     }
 
+    var timestampString: String? {
+        guard let diffInDays = Calendar.current.dateComponents([.day], from: self, to: Date()).day else {
+            return nil
+        }
+        if diffInDays > 1 {
+            return self .toString(dateFormat: "MMM d, h:mm a")
+        } else {
+            let formatter = DateComponentsFormatter()
+            formatter.unitsStyle = .full
+            formatter.maximumUnitCount = 1
+            formatter.allowedUnits = [.hour, .minute, .second]
+            guard let timeString = formatter.string(from: self, to: Date()) else {
+                return nil
+            }
+            let formatString = NSLocalizedString("%@ ago", comment: "")
+            return String(format: formatString, timeString)
+        }
+    }
+
 }

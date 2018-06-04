@@ -31,7 +31,7 @@ class FeedModel: NSObject {
         avatarURL = response["avatarUrl"] as? String
         if let createAt = response["createAt"] as? String {
             self.createAt = Date.dateFromString(string: createAt,
-                format: "yyyy-MM-dd'T'hh:mm:ss'Z'").toString(dateFormat: "MMM d, h:mm a")
+                format: "yyyy-MM-dd'T'HH:mm:ss.SSSZ").timestampString
         }
         if let feedContent = response["feedContent"] as? String {
             self.feedContent = feedContent

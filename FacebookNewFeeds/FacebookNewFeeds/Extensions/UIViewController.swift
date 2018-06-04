@@ -8,11 +8,15 @@
 
 import UIKit
 
+private struct Constants {
+    public static let colorSpinner = "#E0E0E0"
+}
+
 extension UIViewController {
 
     class func displaySpinner(onView: UIView) -> UIView {
         let spinnerView = UIView(frame: onView.bounds)
-        spinnerView.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+        spinnerView.backgroundColor = UIColor(hexString: Constants.colorSpinner)
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         activityIndicator.startAnimating()
         activityIndicator.center = spinnerView.center
