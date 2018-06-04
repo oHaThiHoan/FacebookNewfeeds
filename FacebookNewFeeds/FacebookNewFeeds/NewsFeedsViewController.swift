@@ -14,6 +14,7 @@ private struct Constants {
     public static let newsFeedTableViewCellNibName = "NewsFeedTableViewCell"
     public static let newsFeedTableViewCellIdentifier = "NewsFeedTableViewCell"
     public static let url = "https://www.mocky.io/v2/5b0ce0cb3300005100b400f1"
+    public static let profileViewControllerIdentifier = "ProfileViewController"
 }
 
 class NewsFeedsViewController: UIViewController {
@@ -30,6 +31,7 @@ class NewsFeedsViewController: UIViewController {
         friendsCollectionView.register(UINib.init(nibName: Constants.friendCollectionViewCellNibName, bundle: nil),
                                        forCellWithReuseIdentifier: Constants.friendCollectionViewCellIdentifier)
         newsFeedTableView.dataSource = self
+        newsFeedTableView.delegate = self
         newsFeedTableView.register(UINib.init(nibName: Constants.newsFeedTableViewCellNibName, bundle: nil),
                                    forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         QueryService.get(context: self, url: Constants.url) { (response) in
@@ -105,4 +107,16 @@ extension NewsFeedsViewController: UITableViewDataSource {
         return cell
     }
 
+}
+
+extension NewsFeedsViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        guard let profileViewController = storyboard?.instantiateViewController(
+            withIdentifier: Constants.profileViewControllerIdentifier) else {
+                return
+        }
+        navigationController?.pushViewController(profileViewController, animated: true)
+    }
 }

@@ -17,6 +17,8 @@
 		5734845420BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */; };
 		5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */; };
 		5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734845020BEBAAA005CE11F /* FriendCollectionViewCell.swift */; };
+		577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927D820C12E5C003A9413 /* ProfileViewController.swift */; };
+		577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927DA20C144BE003A9413 /* ProfileModel.swift */; };
 		579F13A120BBF00700FC9F13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F13A020BBF00700FC9F13 /* AppDelegate.swift */; };
 		579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F13A420BBF00700FC9F13 /* Main.storyboard */; };
 		579F13A820BBF00F00FC9F13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 579F13A720BBF00F00FC9F13 /* Assets.xcassets */; };
@@ -60,6 +62,8 @@
 		5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageAttachCollectionViewCell.xib; sourceTree = "<group>"; };
 		5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsFeedTableViewCell.xib; sourceTree = "<group>"; };
 		5734845020BEBAAA005CE11F /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
+		577927D820C12E5C003A9413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		577927DA20C144BE003A9413 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		579F139D20BBF00700FC9F13 /* FacebookNewFeeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookNewFeeds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F13A020BBF00700FC9F13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		579F13A520BBF00700FC9F13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 			children = (
 				5734844620BEBA74005CE11F /* FeedModel.swift */,
 				57CB61B720BFEFC9002880C2 /* StoryModel.swift */,
+				577927DA20C144BE003A9413 /* ProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				579F13CE20BBF66600FC9F13 /* SignInViewController.swift */,
 				579F13D020BC05C600FC9F13 /* RegisterViewController.swift */,
 				5734844320BEBA66005CE11F /* NewsFeedsViewController.swift */,
+				577927D820C12E5C003A9413 /* ProfileViewController.swift */,
 			);
 			path = FacebookNewFeeds;
 			sourceTree = "<group>";
@@ -354,11 +360,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ADMozaicCollectionViewLayout/ADMozaicCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ADMozaicCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
@@ -392,10 +400,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */,
 				5734844920BEBA74005CE11F /* FeedModel.swift in Sources */,
 				572E8D9720BF8F0A0067B2D3 /* UIImageView.swift in Sources */,
 				5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */,
 				57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */,
+				577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */,
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
 				5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */,
 				5734844A20BEBA74005CE11F /* QueryService.swift in Sources */,
