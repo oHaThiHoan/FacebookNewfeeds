@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,6 +22,9 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dBf-V5-bUZ">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="dBf-V5-bUZ" secondAttribute="height" multiplier="1:1" id="Jut-h1-1gc"/>
+                        </constraints>
                     </imageView>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A4b-XR-ir3">
                         <rect key="frame" x="14.5" y="15" width="21" height="21"/>
@@ -34,7 +38,6 @@
                 <constraint firstItem="dBf-V5-bUZ" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3oA-DE-Upu"/>
                 <constraint firstItem="A4b-XR-ir3" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="K7X-pn-dDi"/>
                 <constraint firstItem="dBf-V5-bUZ" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="e3K-a0-1Un"/>
-                <constraint firstAttribute="bottom" secondItem="dBf-V5-bUZ" secondAttribute="bottom" id="nsJ-Sj-94o"/>
                 <constraint firstItem="A4b-XR-ir3" firstAttribute="centerY" secondItem="ZTg-uK-7eu" secondAttribute="centerY" id="qIo-Bd-qQo"/>
                 <constraint firstAttribute="trailing" secondItem="dBf-V5-bUZ" secondAttribute="trailing" id="xHK-Ni-8ej"/>
             </constraints>

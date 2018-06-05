@@ -40,6 +40,7 @@ class NewsFeedTableViewCell: UITableViewCell {
         imageCollectionView.register(UINib.init(nibName: Constants.imageAttachCollectionViewCellNibName, bundle: nil),
                                      forCellWithReuseIdentifier: Constants.imageAttachCollectionViewCellIdentifier)
         feedContentTextView.textContainer.lineBreakMode = .byTruncatingTail
+        selectionStyle = .none
     }
 
     public func setContent(feedModel: FeedModel) {
@@ -60,9 +61,9 @@ class NewsFeedTableViewCell: UITableViewCell {
             feedContentHeightConstraint.constant = CGFloat(Constants.heightFeedContent)
         }
         feedContentTextView.text = feedModel.feedContent
-        reactionCountLabel.text = String(feedModel.reactionCount)
-        commentCountLabel.text = String(feedModel.commentCount) + " Comments"
-        shareCountLabel.text = String(feedModel.sharingCount) + " Shares"
+        reactionCountLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
+        commentCountLabel.text = feedModel.commentCount.formatUsingAbbrevation() + " Comments"
+        shareCountLabel.text = feedModel.sharingCount.formatUsingAbbrevation() + " Shares"
         if let feedImages = feedModel.feedImages {
             numberImageAttach = feedImages.count
         }
