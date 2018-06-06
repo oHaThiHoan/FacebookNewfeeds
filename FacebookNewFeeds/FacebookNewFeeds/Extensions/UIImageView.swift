@@ -16,5 +16,4 @@ extension UIImageView {
             sd_setImage(with: url, completed: nil)
         }
     }
-
 }
