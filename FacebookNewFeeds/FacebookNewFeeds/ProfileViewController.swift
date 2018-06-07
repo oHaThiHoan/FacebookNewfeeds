@@ -62,19 +62,22 @@ class ProfileViewController: UIViewController {
         self.myFeedsTableView.reloadData()
     }
 
-    private func setNavigationItem() {
+    func setNavigationItem() {
         let searchBar = UISearchBar(frame: .zero, textFieldPlaceHolder: "Search",
             textFieldBackground: UIColor(hexString: Constants.colorSearchBarBackground ), textFieldColor: .white)
         let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "message"),
             style: .done, target: nil, action: nil)
+        let leftBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow"),
+            style: .done, target: self, action: #selector(backButtonAction))
         rightBarButton.tintColor = .white
         navigationItem.titleView = searchBar
         navigationItem.rightBarButtonItem = rightBarButton
+        navigationItem.leftBarButtonItem = leftBarButton
         navigationController?.navigationBar.topItem?.title = " "
     }
 
     @objc func backButtonAction() {
-        navigationController?.popViewController(animated: false)
+        navigationController?.popViewController(animated: true)
     }
 
 }

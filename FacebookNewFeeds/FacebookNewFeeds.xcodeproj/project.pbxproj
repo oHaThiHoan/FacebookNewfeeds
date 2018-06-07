@@ -17,6 +17,7 @@
 		5734845420BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */; };
 		5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */; };
 		5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734845020BEBAAA005CE11F /* FriendCollectionViewCell.swift */; };
+		575C92F920C7B1E80016DE49 /* AttactImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575C92F820C7B1E80016DE49 /* AttactImage.swift */; };
 		577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927D820C12E5C003A9413 /* ProfileViewController.swift */; };
 		577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927DA20C144BE003A9413 /* ProfileModel.swift */; };
 		5788B1A120C4F941004E731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A020C4F941004E731E /* UIColor.swift */; };
@@ -65,6 +66,7 @@
 		5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageAttachCollectionViewCell.xib; sourceTree = "<group>"; };
 		5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsFeedTableViewCell.xib; sourceTree = "<group>"; };
 		5734845020BEBAAA005CE11F /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
+		575C92F820C7B1E80016DE49 /* AttactImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttactImage.swift; sourceTree = "<group>"; };
 		577927D820C12E5C003A9413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		577927DA20C144BE003A9413 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5788B1A020C4F941004E731E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 				5734844620BEBA74005CE11F /* FeedModel.swift */,
 				57CB61B720BFEFC9002880C2 /* StoryModel.swift */,
 				577927DA20C144BE003A9413 /* ProfileModel.swift */,
+				575C92F820C7B1E80016DE49 /* AttactImage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				572E8D9720BF8F0A0067B2D3 /* UIImageView.swift in Sources */,
 				5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */,
 				57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */,
+				575C92F920C7B1E80016DE49 /* AttactImage.swift in Sources */,
 				5788B1A120C4F941004E731E /* UIColor.swift in Sources */,
 				577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */,
 				5788B1A320C50E46004E731E /* UISearchBar.swift in Sources */,

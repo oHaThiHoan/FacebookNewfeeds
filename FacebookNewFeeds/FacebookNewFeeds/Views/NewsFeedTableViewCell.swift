@@ -11,7 +11,7 @@ import UIKit
 private struct Constants {
     public static let imageAttachCollectionViewCellNibName = "ImageAttachCollectionViewCell"
     public static let imageAttachCollectionViewCellIdentifier = "ImageAttachCollectionViewCell"
-    public static let heightCollectionView = 150
+    public static let heightCollectionView = 200
     public static let heightFeedContent = 50
     public static let visibleModePublic = "public"
     public static let visibleModeFriends = "friends"
@@ -19,7 +19,7 @@ private struct Constants {
 
 class NewsFeedTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imageCollectionView: UICollectionView!
+    @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var heightImageAttachCollectionView: NSLayoutConstraint!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -35,10 +35,6 @@ class NewsFeedTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        imageCollectionView.delegate = self
-        imageCollectionView.dataSource = self
-        imageCollectionView.register(UINib.init(nibName: Constants.imageAttachCollectionViewCellNibName, bundle: nil),
-                                     forCellWithReuseIdentifier: Constants.imageAttachCollectionViewCellIdentifier)
         feedContentTextView.textContainer.lineBreakMode = .byTruncatingTail
         selectionStyle = .none
     }
@@ -64,66 +60,124 @@ class NewsFeedTableViewCell: UITableViewCell {
         reactionCountLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
         commentCountLabel.text = feedModel.commentCount.formatUsingAbbrevation() + " Comments"
         shareCountLabel.text = feedModel.sharingCount.formatUsingAbbrevation() + " Shares"
-        if let feedImages = feedModel.feedImages {
-            numberImageAttach = feedImages.count
+        guard let feedImages = feedModel.feedImages else {
+            return
         }
-        if numberImageAttach == 0 {
+        if feedImages.count == 0 {
             heightImageAttachCollectionView.constant = 0
         } else {
             heightImageAttachCollectionView.constant = CGFloat(Constants.heightCollectionView)
-            imageCollectionView.reloadData()
+        }
+        addImageToStackView(images: feedImages)
+    }
+
+    private func addImageToStackView (images: [String]) {
+        for view in stackView.subviews {
+            view.removeFromSuperview()
+        }
+        if images.count == 1 {
+            addOneImage(image: images[0], toStackView: stackView)
+        } else if images.count == 2 {
+            for index in 0...1 {
+                addOneImage(image: images[index], toStackView: stackView)
+            }
+        } else if images.count == 3 {
+            addThreeImage(images: images, toStackView: stackView)
+        } else if images.count >= 4 {
+            addFourImage(images: images, toStackView: stackView) { (lastImageView) in
+                let restLabel = UILabel(frame: CGRect(x: UIScreen.main.bounds.width / 4,
+                                                      y: lastImageView.frame.height / 2, width: 50, height: 50))
+                let restNumber = images.count - 4
+                if restNumber > 0 {
+                    restLabel.text = "+" + String(restNumber)
+                }
+                restLabel.textColor = .white
+                lastImageView.addSubview(restLabel)
+            }
         }
     }
 
-}
-
-extension NewsFeedTableViewCell: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        guard let feedImages = feedModel.feedImages else {
-            return 0
-        }
-        return feedImages.count
+    private func addOneImage(image: String, toStackView: UIStackView) {
+        let imageView = UIImageView()
+        imageView.setImageFromStringURL(stringURL: image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        toStackView.addArrangedSubview(imageView)
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier:
-            Constants.imageAttachCollectionViewCellIdentifier, for: indexPath) as? ImageAttachCollectionViewCell,
-            let feedImages = feedModel.feedImages else {
-            return UICollectionViewCell()
+    private func addThreeImage(images: [String], toStackView: UIStackView) {
+        var attachImageArray: [AttactImage] = []
+        var firstImageView = AttactImage(url: images[0])
+        var firstImageViewIndex = 0
+        for index in 0...2 {
+            let attachImage = AttactImage(url: images[index])
+            attachImageArray.append(attachImage)
+            if attachImage.ratio < firstImageView.ratio {
+                firstImageView = attachImage
+                firstImageViewIndex = index
+            }
         }
-        let attachImageURL = feedImages[indexPath.row]
-        cell.setContent(imageUrl: attachImageURL)
-        if indexPath.row == 3 && numberImageAttach > 4 {
-            let restOfImageAttach = numberImageAttach - 4
-            cell.setRestOfImageAttach(number: restOfImageAttach)
+        attachImageArray.remove(at: firstImageViewIndex)
+        let subStackView = initStackView()
+        if firstImageView.ratio > (16 / 9) {
+            toStackView.axis = .vertical
+            subStackView.axis = .horizontal
         } else {
-            cell.setRestOfImageAttach(number: 0)
+            subStackView.axis = .vertical
         }
-        return cell
+        toStackView.addArrangedSubview(firstImageView.imageView)
+        for attachImage in attachImageArray {
+            subStackView.addArrangedSubview(attachImage.imageView)
+        }
+        toStackView.addArrangedSubview(subStackView)
     }
 
-}
-
-extension NewsFeedTableViewCell: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var width: CGFloat
-        var height: CGFloat
-        if  numberImageAttach == 0 {
-            width = 0
-            height = 0
-        } else if numberImageAttach <= 2 {
-            width = UIScreen.main.bounds.width / CGFloat(numberImageAttach) - CGFloat(5 * (numberImageAttach + 1))
-            height = CGFloat(Constants.heightCollectionView)
-        } else {
-            width = UIScreen.main.bounds.width / CGFloat(2) - 15
-            height = CGFloat(Constants.heightCollectionView / 2)
+    private func addFourImage(images: [String], toStackView: UIStackView, addMoreText: (UIImageView) -> Void) {
+        var attachImageArray: [AttactImage] = []
+        var firstImageView = AttactImage(url: images[0])
+        var firstImageViewIndex = 0
+        for index in 0...3 {
+            let attachImage = AttactImage(url: images[index])
+            attachImageArray.append(attachImage)
+            if attachImage.ratio < firstImageView.ratio {
+                firstImageView = attachImage
+                firstImageViewIndex = index
+            }
         }
-        return CGSize(width: width, height: height)
+        if firstImageView.ratio == 1 {
+            let subStackView = initStackView()
+            subStackView.axis = .vertical
+            for index in 0...1 {
+                subStackView.addArrangedSubview(attachImageArray[index].imageView)
+            }
+            let subStackView1 = initStackView()
+            subStackView.axis = .vertical
+            subStackView1.addArrangedSubview(attachImageArray[2].imageView)
+            let lastImageView = attachImageArray[3].imageView
+            addMoreText(lastImageView)
+            subStackView1.addArrangedSubview(lastImageView)
+            toStackView.addArrangedSubview(subStackView)
+            toStackView.addArrangedSubview(subStackView1)
+        } else {
+            attachImageArray.remove(at: firstImageViewIndex)
+            toStackView.addArrangedSubview(firstImageView.imageView)
+            let subStackView =  initStackView()
+            subStackView.axis = .vertical
+            let lastImageView = attachImageArray.remove(at: attachImageArray.count - 1)
+            for attachImage in attachImageArray {
+                subStackView.addArrangedSubview(attachImage.imageView)
+            }
+            addMoreText(lastImageView.imageView)
+            subStackView.addArrangedSubview(lastImageView.imageView)
+            toStackView.addArrangedSubview(subStackView)
+        }
+    }
+
+    private func initStackView() -> UIStackView {
+        let subStackView = UIStackView()
+        subStackView.distribution = .fillEqually
+        subStackView.spacing = 1
+        return subStackView
     }
 
 }
