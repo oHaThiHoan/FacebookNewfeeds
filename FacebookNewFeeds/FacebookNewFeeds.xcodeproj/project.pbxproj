@@ -32,6 +32,8 @@
 		57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B320BFD06E002880C2 /* UIViewController.swift */; };
 		57CB61B620BFE9EF002880C2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B520BFE9EF002880C2 /* Date.swift */; };
 		57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B720BFEFC9002880C2 /* StoryModel.swift */; };
+		57D83C1D20C90E27002E8ADD /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D83C1B20C90E27002E8ADD /* LoadMoreTableViewCell.swift */; };
+		57D83C1E20C90E27002E8ADD /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */; };
 		E6AE7B0205A8020F8E1E9CCF /* Pods_FacebookNewFeeds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +87,8 @@
 		57CB61B320BFD06E002880C2 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		57CB61B520BFE9EF002880C2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		57CB61B720BFEFC9002880C2 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		57D83C1B20C90E27002E8ADD /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
+		57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
 		63766150D209A8B7C7BF6F5E /* Pods_FacebookNewFeedsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeedsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7FA8B05DE973186D7A7878A /* Pods-FacebookNewFeeds.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FacebookNewFeeds.release.xcconfig"; path = "Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +209,8 @@
 				5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */,
 				5734844D20BEBAAA005CE11F /* NewsFeedTableViewCell.swift */,
 				5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */,
+				57D83C1B20C90E27002E8ADD /* LoadMoreTableViewCell.swift */,
+				57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -332,6 +338,7 @@
 				579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */,
 				5734845420BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib in Resources */,
 				5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */,
+				57D83C1E20C90E27002E8ADD /* LoadMoreTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +431,7 @@
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
 				5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */,
 				5734844A20BEBA74005CE11F /* QueryService.swift in Sources */,
+				57D83C1D20C90E27002E8ADD /* LoadMoreTableViewCell.swift in Sources */,
 				57CB61B620BFE9EF002880C2 /* Date.swift in Sources */,
 				5734845320BEBAAA005CE11F /* NewsFeedTableViewCell.swift in Sources */,
 				5734845220BEBAAA005CE11F /* ImageAttachCollectionViewCell.swift in Sources */,
