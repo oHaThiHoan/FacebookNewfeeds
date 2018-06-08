@@ -17,6 +17,11 @@ extension UISearchBar {
         textFieldInsideSearchBar?.textColor = textFieldColor
         textFieldInsideSearchBar?.backgroundColor = textFieldBackground
         textFieldInsideSearchBar?.placeholder = textFieldPlaceHolder
+        textFieldInsideSearchBar?.attributedPlaceholder = NSAttributedString(string: textFieldPlaceHolder,
+            attributes: [NSAttributedStringKey.foregroundColor: textFieldColor])
+        if  let imageView = textFieldInsideSearchBar?.leftView as? UIImageView {
+            imageView.image = imageView.image?.transform(withNewColor: textFieldColor)
+        }
     }
 
 }

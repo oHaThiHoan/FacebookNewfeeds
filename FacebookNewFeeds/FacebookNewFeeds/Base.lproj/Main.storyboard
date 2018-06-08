@@ -186,20 +186,20 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nQg-Hx-gu6">
-                                <rect key="frame" x="0.0" y="135" width="375" height="483"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="nQg-Hx-gu6">
+                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="nQg-Hx-gu6" firstAttribute="top" secondItem="niY-4r-DdJ" secondAttribute="bottom" constant="5" id="Axg-O7-VP7"/>
+                            <constraint firstAttribute="bottom" secondItem="nQg-Hx-gu6" secondAttribute="bottom" id="CzH-WV-Czp"/>
                             <constraint firstItem="niY-4r-DdJ" firstAttribute="top" secondItem="1ng-Ab-Xet" secondAttribute="top" id="M2y-RT-BhV"/>
                             <constraint firstItem="niY-4r-DdJ" firstAttribute="leading" secondItem="1ng-Ab-Xet" secondAttribute="leading" id="S9z-o1-0RE"/>
                             <constraint firstItem="1ng-Ab-Xet" firstAttribute="trailing" secondItem="nQg-Hx-gu6" secondAttribute="trailing" id="ZFl-z2-UZr"/>
                             <constraint firstItem="1ng-Ab-Xet" firstAttribute="trailing" secondItem="niY-4r-DdJ" secondAttribute="trailing" id="dLt-FX-HC6"/>
                             <constraint firstItem="nQg-Hx-gu6" firstAttribute="leading" secondItem="1ng-Ab-Xet" secondAttribute="leading" id="nsM-J5-9At"/>
-                            <constraint firstItem="1ng-Ab-Xet" firstAttribute="bottom" secondItem="nQg-Hx-gu6" secondAttribute="bottom" id="zMp-Vz-RBN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1ng-Ab-Xet"/>
                     </view>

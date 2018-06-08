@@ -13,7 +13,8 @@ extension UIImageView {
 
     func setImageFromStringURL(stringURL: String) {
         if let url = URL(string: stringURL) {
-            sd_setImage(with: url, completed: nil)
+            sd_setImage(with: url)
         }
     }
+
 }

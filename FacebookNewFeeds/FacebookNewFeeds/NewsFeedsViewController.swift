@@ -16,7 +16,7 @@ private struct Constants {
     public static let loadMoreTableViewCellNibName = "LoadMoreTableViewCell"
     public static let loadMoreTableViewCellIdentifier = "LoadMoreTableViewCell"
     public static let heightLoadMoreCell: CGFloat = 44
-    public static let url = "https://www.mocky.io/v2/5b0ce0cb3300005100b400f1"
+    public static let url = "https://www.mocky.io/v2/5b19e5ce3300006800fb122e"
     public static let profileViewControllerIdentifier = "ProfileViewController"
     public static let colorSearchBarBackground = "#2E4780"
     public static let numberNewsFeedShow = 10
@@ -117,17 +117,13 @@ extension NewsFeedsViewController: UITableViewDataSource {
         }
         let feedModel = feedsTempArray[indexPath.row]
         cell.setContent(feedModel: feedModel)
+        cell.delegate = self
         return cell
     }
 
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: Constants.loadMoreTableViewCellIdentifier)
-    }
+}
 
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return feedsArray.count == feedsTempArray.count ? 0.0001 : Constants.heightLoadMoreCell
-    }
+extension NewsFeedsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let lastElement = feedsTempArray.count - 1
@@ -150,12 +146,20 @@ extension NewsFeedsViewController: UITableViewDataSource {
         }
     }
 
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(
+            withIdentifier: Constants.loadMoreTableViewCellIdentifier)
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return feedsArray.count == feedsTempArray.count ? 0.0001 : Constants.heightLoadMoreCell
+    }
+
 }
 
-extension NewsFeedsViewController: UITableViewDelegate {
+extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+    func tapToAvatar() {
         guard let profileViewController = storyboard?.instantiateViewController(
             withIdentifier: Constants.profileViewControllerIdentifier) as? ProfileViewController else {
                 return
