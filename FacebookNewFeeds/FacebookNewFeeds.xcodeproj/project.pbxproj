@@ -32,27 +32,13 @@
 		57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B320BFD06E002880C2 /* UIViewController.swift */; };
 		57CB61B620BFE9EF002880C2 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B520BFE9EF002880C2 /* Date.swift */; };
 		57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CB61B720BFEFC9002880C2 /* StoryModel.swift */; };
+		57CF2CA120CA15820039C58E /* PhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2CA020CA15820039C58E /* PhotoView.swift */; };
+		57CF2CA320CA15900039C58E /* PhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57CF2CA220CA15900039C58E /* PhotoView.xib */; };
+		57CF2CB320CA705F0039C58E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57CF2CB220CA705F0039C58E /* UIImage.swift */; };
 		57D83C1D20C90E27002E8ADD /* LoadMoreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57D83C1B20C90E27002E8ADD /* LoadMoreTableViewCell.swift */; };
 		57D83C1E20C90E27002E8ADD /* LoadMoreTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */; };
 		E6AE7B0205A8020F8E1E9CCF /* Pods_FacebookNewFeeds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		579F13B220BBF00F00FC9F13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 579F139520BBF00700FC9F13 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 579F139C20BBF00700FC9F13;
-			remoteInfo = FacebookNewFeeds;
-		};
-		579F13BD20BBF00F00FC9F13 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 579F139520BBF00700FC9F13 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 579F139C20BBF00700FC9F13;
-			remoteInfo = FacebookNewFeeds;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeeds.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +54,8 @@
 		5734844E20BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageAttachCollectionViewCell.xib; sourceTree = "<group>"; };
 		5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsFeedTableViewCell.xib; sourceTree = "<group>"; };
 		5734845020BEBAAA005CE11F /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
+		574C52F920CA7C88003F94D9 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		574C52FB20CA7CC3003F94D9 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		575C92F820C7B1E80016DE49 /* AttactImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttactImage.swift; sourceTree = "<group>"; };
 		577927D820C12E5C003A9413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		577927DA20C144BE003A9413 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
@@ -80,13 +68,14 @@
 		579F13A720BBF00F00FC9F13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		579F13AA20BBF00F00FC9F13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		579F13AC20BBF00F00FC9F13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		579F13B120BBF00F00FC9F13 /* FacebookNewFeedsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookNewFeedsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		579F13BC20BBF00F00FC9F13 /* FacebookNewFeedsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FacebookNewFeedsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F13CE20BBF66600FC9F13 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		579F13D020BC05C600FC9F13 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		57CB61B320BFD06E002880C2 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		57CB61B520BFE9EF002880C2 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		57CB61B720BFEFC9002880C2 /* StoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryModel.swift; sourceTree = "<group>"; };
+		57CF2CA020CA15820039C58E /* PhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoView.swift; sourceTree = "<group>"; };
+		57CF2CA220CA15900039C58E /* PhotoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PhotoView.xib; sourceTree = "<group>"; };
+		57CF2CB220CA705F0039C58E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		57D83C1B20C90E27002E8ADD /* LoadMoreTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreTableViewCell.swift; sourceTree = "<group>"; };
 		57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMoreTableViewCell.xib; sourceTree = "<group>"; };
 		63766150D209A8B7C7BF6F5E /* Pods_FacebookNewFeedsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FacebookNewFeedsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,20 +88,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6AE7B0205A8020F8E1E9CCF /* Pods_FacebookNewFeeds.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		579F13AE20BBF00F00FC9F13 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		579F13B920BBF00F00FC9F13 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +112,7 @@
 				5788B1A020C4F941004E731E /* UIColor.swift */,
 				5788B1A220C50E46004E731E /* UISearchBar.swift */,
 				5788B1A420C51426004E731E /* Int.swift */,
+				57CF2CB220CA705F0039C58E /* UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -174,8 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				579F139D20BBF00700FC9F13 /* FacebookNewFeeds.app */,
-				579F13B120BBF00F00FC9F13 /* FacebookNewFeedsTests.xctest */,
-				579F13BC20BBF00F00FC9F13 /* FacebookNewFeedsUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,6 +185,8 @@
 				5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */,
 				57D83C1B20C90E27002E8ADD /* LoadMoreTableViewCell.swift */,
 				57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */,
+				57CF2CA020CA15820039C58E /* PhotoView.swift */,
+				57CF2CA220CA15900039C58E /* PhotoView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -218,6 +194,8 @@
 		BEE7766E2950CC36EC78E6A2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				574C52FB20CA7CC3003F94D9 /* Alamofire.framework */,
+				574C52F920CA7C88003F94D9 /* SDWebImage.framework */,
 				0567382A97521C0D086B9047 /* Pods_FacebookNewFeeds.framework */,
 				63766150D209A8B7C7BF6F5E /* Pods_FacebookNewFeedsTests.framework */,
 				16CE680084F53EFCAC7C34B7 /* Pods_FacebookNewFeedsUITests.framework */,
@@ -248,42 +226,6 @@
 			productReference = 579F139D20BBF00700FC9F13 /* FacebookNewFeeds.app */;
 			productType = "com.apple.product-type.application";
 		};
-		579F13B020BBF00F00FC9F13 /* FacebookNewFeedsTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 579F13C820BBF00F00FC9F13 /* Build configuration list for PBXNativeTarget "FacebookNewFeedsTests" */;
-			buildPhases = (
-				579F13AD20BBF00F00FC9F13 /* Sources */,
-				579F13AE20BBF00F00FC9F13 /* Frameworks */,
-				579F13AF20BBF00F00FC9F13 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				579F13B320BBF00F00FC9F13 /* PBXTargetDependency */,
-			);
-			name = FacebookNewFeedsTests;
-			productName = FacebookNewFeedsTests;
-			productReference = 579F13B120BBF00F00FC9F13 /* FacebookNewFeedsTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		579F13BB20BBF00F00FC9F13 /* FacebookNewFeedsUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 579F13CB20BBF00F00FC9F13 /* Build configuration list for PBXNativeTarget "FacebookNewFeedsUITests" */;
-			buildPhases = (
-				579F13B820BBF00F00FC9F13 /* Sources */,
-				579F13B920BBF00F00FC9F13 /* Frameworks */,
-				579F13BA20BBF00F00FC9F13 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				579F13BE20BBF00F00FC9F13 /* PBXTargetDependency */,
-			);
-			name = FacebookNewFeedsUITests;
-			productName = FacebookNewFeedsUITests;
-			productReference = 579F13BC20BBF00F00FC9F13 /* FacebookNewFeedsUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -296,14 +238,6 @@
 				TargetAttributes = {
 					579F139C20BBF00700FC9F13 = {
 						CreatedOnToolsVersion = 9.3.1;
-					};
-					579F13B020BBF00F00FC9F13 = {
-						CreatedOnToolsVersion = 9.3.1;
-						TestTargetID = 579F139C20BBF00700FC9F13;
-					};
-					579F13BB20BBF00F00FC9F13 = {
-						CreatedOnToolsVersion = 9.3.1;
-						TestTargetID = 579F139C20BBF00700FC9F13;
 					};
 				};
 			};
@@ -321,8 +255,6 @@
 			projectRoot = "";
 			targets = (
 				579F139C20BBF00700FC9F13 /* FacebookNewFeeds */,
-				579F13B020BBF00F00FC9F13 /* FacebookNewFeedsTests */,
-				579F13BB20BBF00F00FC9F13 /* FacebookNewFeedsUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -335,24 +267,11 @@
 				5734845120BEBAAA005CE11F /* FriendCollectionViewCell.xib in Resources */,
 				579F13AB20BBF00F00FC9F13 /* LaunchScreen.storyboard in Resources */,
 				579F13A820BBF00F00FC9F13 /* Assets.xcassets in Resources */,
+				57CF2CA320CA15900039C58E /* PhotoView.xib in Resources */,
 				579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */,
 				5734845420BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib in Resources */,
 				5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */,
 				57D83C1E20C90E27002E8ADD /* LoadMoreTableViewCell.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		579F13AF20BBF00F00FC9F13 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		579F13BA20BBF00F00FC9F13 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */,
+				57CF2CB320CA705F0039C58E /* UIImage.swift in Sources */,
 				5734844920BEBA74005CE11F /* FeedModel.swift in Sources */,
 				572E8D9720BF8F0A0067B2D3 /* UIImageView.swift in Sources */,
 				5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */,
@@ -428,6 +348,7 @@
 				5788B1A120C4F941004E731E /* UIColor.swift in Sources */,
 				577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */,
 				5788B1A320C50E46004E731E /* UISearchBar.swift in Sources */,
+				57CF2CA120CA15820039C58E /* PhotoView.swift in Sources */,
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
 				5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */,
 				5734844A20BEBA74005CE11F /* QueryService.swift in Sources */,
@@ -442,34 +363,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		579F13AD20BBF00F00FC9F13 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		579F13B820BBF00F00FC9F13 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		579F13B320BBF00F00FC9F13 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 579F139C20BBF00700FC9F13 /* FacebookNewFeeds */;
-			targetProxy = 579F13B220BBF00F00FC9F13 /* PBXContainerItemProxy */;
-		};
-		579F13BE20BBF00F00FC9F13 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 579F139C20BBF00700FC9F13 /* FacebookNewFeeds */;
-			targetProxy = 579F13BD20BBF00F00FC9F13 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		579F13A420BBF00700FC9F13 /* Main.storyboard */ = {
@@ -641,84 +535,6 @@
 			};
 			name = Release;
 		};
-		579F13C920BBF00F00FC9F13 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FacebookNewFeedsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.FacebookNewFeed.FacebookNewFeedsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FacebookNewFeeds.app/FacebookNewFeeds";
-			};
-			name = Debug;
-		};
-		579F13CA20BBF00F00FC9F13 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FacebookNewFeedsTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.FacebookNewFeed.FacebookNewFeedsTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FacebookNewFeeds.app/FacebookNewFeeds";
-			};
-			name = Release;
-		};
-		579F13CC20BBF00F00FC9F13 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FacebookNewFeedsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.FacebookNewFeed.FacebookNewFeedsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FacebookNewFeeds;
-			};
-			name = Debug;
-		};
-		579F13CD20BBF00F00FC9F13 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = FacebookNewFeedsUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.framgia.FacebookNewFeed.FacebookNewFeedsUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = FacebookNewFeeds;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -736,24 +552,6 @@
 			buildConfigurations = (
 				579F13C620BBF00F00FC9F13 /* Debug */,
 				579F13C720BBF00F00FC9F13 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		579F13C820BBF00F00FC9F13 /* Build configuration list for PBXNativeTarget "FacebookNewFeedsTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				579F13C920BBF00F00FC9F13 /* Debug */,
-				579F13CA20BBF00F00FC9F13 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		579F13CB20BBF00F00FC9F13 /* Build configuration list for PBXNativeTarget "FacebookNewFeedsUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				579F13CC20BBF00F00FC9F13 /* Debug */,
-				579F13CD20BBF00F00FC9F13 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
