@@ -20,6 +20,7 @@ private struct Constants {
     public static let profileViewControllerIdentifier = "ProfileViewController"
     public static let colorSearchBarBackground = "#2E4780"
     public static let numberNewsFeedShow = 10
+    public static let commentViewController = "CommentViewController"
 }
 
 class NewsFeedsViewController: UIViewController {
@@ -29,6 +30,7 @@ class NewsFeedsViewController: UIViewController {
     var feedsArray: [FeedModel] = []
     var storyArray: [StoryModel] = []
     var feedsTempArray: [FeedModel] = []
+    let interactor = Interactor()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -116,7 +118,7 @@ extension NewsFeedsViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         let feedModel = feedsTempArray[indexPath.row]
-        cell.setContent(feedModel: feedModel)
+        cell.setContent(feedModel: feedModel, indexPath: indexPath)
         cell.delegate = self
         return cell
     }
@@ -155,9 +157,43 @@ extension NewsFeedsViewController: UITableViewDelegate {
         return feedsArray.count == feedsTempArray.count ? 0.0001 : Constants.heightLoadMoreCell
     }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.0001
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
 }
 
 extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
+
+    func clickLikeButton(indexPath: IndexPath) {
+        newsFeedTableView.beginUpdates()
+        if feedsTempArray[indexPath.row].isReacted {
+            feedsTempArray[indexPath.row].reactionCount -= 1
+            feedsTempArray[indexPath.row].isReacted = false
+        } else {
+            feedsTempArray[indexPath.row].reactionCount += 1
+            feedsTempArray[indexPath.row].isReacted = true
+        }
+        newsFeedTableView.reloadRows(at: [indexPath], with: .none)
+        newsFeedTableView.endUpdates()
+    }
+
+    func clickCommentButton(indexPath: IndexPath) {
+        guard let commentViewController = storyboard?.instantiateViewController(
+            withIdentifier: Constants.commentViewController) as? CommentViewController else {
+                return
+        }
+        commentViewController.transitioningDelegate = self
+        commentViewController.interactor = interactor
+        commentViewController.feedModel = feedsTempArray[indexPath.row]
+        commentViewController.indexPath = indexPath
+        commentViewController.delegate = self
+        present(commentViewController, animated: true, completion: nil)
+    }
 
     func tapToAvatar() {
         guard let profileViewController = storyboard?.instantiateViewController(
@@ -165,6 +201,28 @@ extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
                 return
         }
         navigationController?.pushViewController(profileViewController, animated: true)
+    }
+
+}
+
+extension NewsFeedsViewController: UIViewControllerTransitioningDelegate {
+
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DismissAnimator()
+    }
+
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning)
+                                           -> UIViewControllerInteractiveTransitioning? {
+        return interactor.hasStarted ? interactor : nil
+    }
+
+}
+
+extension NewsFeedsViewController: CommentControllerDelegate {
+
+    func dismiss(feedModel: FeedModel, indexPath: IndexPath) {
+        feedsTempArray[indexPath.row] = feedModel
+        newsFeedTableView.reloadRows(at: [indexPath], with: .none)
     }
 
 }
