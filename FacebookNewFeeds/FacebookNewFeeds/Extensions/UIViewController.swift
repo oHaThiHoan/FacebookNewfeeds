@@ -16,6 +16,7 @@ extension UIViewController {
 
     class func displaySpinner(onView: UIView) -> UIView {
         let spinnerView = UIView(frame: onView.bounds)
+        spinnerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         spinnerView.backgroundColor = UIColor(hexString: Constants.colorSpinner)
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
         activityIndicator.startAnimating()

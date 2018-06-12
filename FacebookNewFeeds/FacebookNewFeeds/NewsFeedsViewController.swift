@@ -44,7 +44,7 @@ class NewsFeedsViewController: UIViewController {
                                    forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         newsFeedTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
                                    forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
-        QueryService.get(context: self, url: Constants.url) { (response) in
+        QueryService.get(view: view, url: Constants.url, showIndicator: true) { (response) in
             guard let responseFeedData = response["feeds"] as? [[String: Any]] else {
                 return
             }

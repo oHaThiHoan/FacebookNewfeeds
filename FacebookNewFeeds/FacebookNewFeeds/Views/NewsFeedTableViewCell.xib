@@ -21,8 +21,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="497.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="4lf-Yl-yRR">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4lf-Yl-yRR">
                         <rect key="frame" x="8" y="8" width="50" height="50.5"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="50" id="47m-8e-bcT"/>
                             <constraint firstAttribute="width" secondItem="4lf-Yl-yRR" secondAttribute="height" multiplier="1:1" id="qPn-Yb-AFY"/>
@@ -272,7 +273,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="avatar" width="1280" height="720"/>
         <image name="ic-comment" width="25" height="25"/>
         <image name="ic-like" width="25" height="25"/>
         <image name="ic-like2" width="30" height="31"/>
