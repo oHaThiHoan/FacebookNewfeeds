@@ -18,6 +18,14 @@
 		5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5734844F20BEBAAA005CE11F /* NewsFeedTableViewCell.xib */; };
 		5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734845020BEBAAA005CE11F /* FriendCollectionViewCell.swift */; };
 		575C92F920C7B1E80016DE49 /* AttactImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575C92F820C7B1E80016DE49 /* AttactImage.swift */; };
+		576156B320CF721400DAC188 /* LoadMoreCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576156B120CF721400DAC188 /* LoadMoreCommentTableViewCell.swift */; };
+		576156B420CF721400DAC188 /* LoadMoreCommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 576156B220CF721400DAC188 /* LoadMoreCommentTableViewCell.xib */; };
+		576156B620CF7AF300DAC188 /* CommentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576156B520CF7AF300DAC188 /* CommentModel.swift */; };
+		5773C63020CE2F4E00F748E1 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773C62F20CE2F4E00F748E1 /* CommentViewController.swift */; };
+		5773C63220CE4C6E00F748E1 /* Interactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773C63120CE4C6E00F748E1 /* Interactor.swift */; };
+		5773C63420CE4C8500F748E1 /* DismissAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773C63320CE4C8500F748E1 /* DismissAnimator.swift */; };
+		5773C63720CE776600F748E1 /* CommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5773C63520CE776600F748E1 /* CommentTableViewCell.swift */; };
+		5773C63820CE776600F748E1 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5773C63620CE776600F748E1 /* CommentTableViewCell.xib */; };
 		577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927D820C12E5C003A9413 /* ProfileViewController.swift */; };
 		577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927DA20C144BE003A9413 /* ProfileModel.swift */; };
 		5788B1A120C4F941004E731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A020C4F941004E731E /* UIColor.swift */; };
@@ -57,6 +65,14 @@
 		574C52F920CA7C88003F94D9 /* SDWebImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SDWebImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		574C52FB20CA7CC3003F94D9 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		575C92F820C7B1E80016DE49 /* AttactImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttactImage.swift; sourceTree = "<group>"; };
+		576156B120CF721400DAC188 /* LoadMoreCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCommentTableViewCell.swift; sourceTree = "<group>"; };
+		576156B220CF721400DAC188 /* LoadMoreCommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMoreCommentTableViewCell.xib; sourceTree = "<group>"; };
+		576156B520CF7AF300DAC188 /* CommentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentModel.swift; sourceTree = "<group>"; };
+		5773C62F20CE2F4E00F748E1 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		5773C63120CE4C6E00F748E1 /* Interactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactor.swift; sourceTree = "<group>"; };
+		5773C63320CE4C8500F748E1 /* DismissAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DismissAnimator.swift; sourceTree = "<group>"; };
+		5773C63520CE776600F748E1 /* CommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTableViewCell.swift; sourceTree = "<group>"; };
+		5773C63620CE776600F748E1 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		577927D820C12E5C003A9413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		577927DA20C144BE003A9413 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		5788B1A020C4F941004E731E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -124,6 +140,7 @@
 				57CB61B720BFEFC9002880C2 /* StoryModel.swift */,
 				577927DA20C144BE003A9413 /* ProfileModel.swift */,
 				575C92F820C7B1E80016DE49 /* AttactImage.swift */,
+				576156B520CF7AF300DAC188 /* CommentModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -170,6 +187,7 @@
 				579F13D020BC05C600FC9F13 /* RegisterViewController.swift */,
 				5734844320BEBA66005CE11F /* NewsFeedsViewController.swift */,
 				577927D820C12E5C003A9413 /* ProfileViewController.swift */,
+				5773C62F20CE2F4E00F748E1 /* CommentViewController.swift */,
 			);
 			path = FacebookNewFeeds;
 			sourceTree = "<group>";
@@ -187,6 +205,12 @@
 				57D83C1C20C90E27002E8ADD /* LoadMoreTableViewCell.xib */,
 				57CF2CA020CA15820039C58E /* PhotoView.swift */,
 				57CF2CA220CA15900039C58E /* PhotoView.xib */,
+				5773C63120CE4C6E00F748E1 /* Interactor.swift */,
+				5773C63320CE4C8500F748E1 /* DismissAnimator.swift */,
+				5773C63520CE776600F748E1 /* CommentTableViewCell.swift */,
+				5773C63620CE776600F748E1 /* CommentTableViewCell.xib */,
+				576156B120CF721400DAC188 /* LoadMoreCommentTableViewCell.swift */,
+				576156B220CF721400DAC188 /* LoadMoreCommentTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -268,9 +292,11 @@
 				579F13AB20BBF00F00FC9F13 /* LaunchScreen.storyboard in Resources */,
 				579F13A820BBF00F00FC9F13 /* Assets.xcassets in Resources */,
 				57CF2CA320CA15900039C58E /* PhotoView.xib in Resources */,
+				576156B420CF721400DAC188 /* LoadMoreCommentTableViewCell.xib in Resources */,
 				579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */,
 				5734845420BEBAAA005CE11F /* ImageAttachCollectionViewCell.xib in Resources */,
 				5734845520BEBAAA005CE11F /* NewsFeedTableViewCell.xib in Resources */,
+				5773C63820CE776600F748E1 /* CommentTableViewCell.xib in Resources */,
 				57D83C1E20C90E27002E8ADD /* LoadMoreTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,20 +370,26 @@
 				572E8D9720BF8F0A0067B2D3 /* UIImageView.swift in Sources */,
 				5734845620BEBAAA005CE11F /* FriendCollectionViewCell.swift in Sources */,
 				57CB61B420BFD06E002880C2 /* UIViewController.swift in Sources */,
+				5773C63220CE4C6E00F748E1 /* Interactor.swift in Sources */,
 				575C92F920C7B1E80016DE49 /* AttactImage.swift in Sources */,
+				5773C63020CE2F4E00F748E1 /* CommentViewController.swift in Sources */,
 				5788B1A120C4F941004E731E /* UIColor.swift in Sources */,
 				577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */,
 				5788B1A320C50E46004E731E /* UISearchBar.swift in Sources */,
 				57CF2CA120CA15820039C58E /* PhotoView.swift in Sources */,
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
 				5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */,
+				576156B320CF721400DAC188 /* LoadMoreCommentTableViewCell.swift in Sources */,
 				5734844A20BEBA74005CE11F /* QueryService.swift in Sources */,
+				5773C63420CE4C8500F748E1 /* DismissAnimator.swift in Sources */,
 				57D83C1D20C90E27002E8ADD /* LoadMoreTableViewCell.swift in Sources */,
 				57CB61B620BFE9EF002880C2 /* Date.swift in Sources */,
 				5734845320BEBAAA005CE11F /* NewsFeedTableViewCell.swift in Sources */,
 				5734845220BEBAAA005CE11F /* ImageAttachCollectionViewCell.swift in Sources */,
+				5773C63720CE776600F748E1 /* CommentTableViewCell.swift in Sources */,
 				579F13A120BBF00700FC9F13 /* AppDelegate.swift in Sources */,
 				5788B1A520C51426004E731E /* Int.swift in Sources */,
+				576156B620CF7AF300DAC188 /* CommentModel.swift in Sources */,
 				579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */,
 				57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */,
 			);

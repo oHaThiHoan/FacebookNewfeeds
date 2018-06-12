@@ -95,7 +95,7 @@ extension ProfileViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         let feedModel = profileModel.feeds[indexPath.row]
-        cell.setContent(feedModel: feedModel)
+        cell.setContent(feedModel: feedModel, indexPath: indexPath)
         return cell
     }
 

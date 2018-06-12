@@ -19,10 +19,12 @@ class FeedModel: NSObject {
     var commentCount = 0
     var sharingCount = 0
     var feedImages: [String]?
+    var isReacted = false
 
     override init() {
         super.init()
     }
+
     init(response: [String: Any]) {
         super.init()
         if let fullName = response["fullName"] as? String {
