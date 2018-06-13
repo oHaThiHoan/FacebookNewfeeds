@@ -24,7 +24,7 @@ protocol  NewsFeedTableViewCellDelegate: class {
     func tapToAvatar()
     func clickLikeButton(indexPath: IndexPath)
     func clickCommentButton(indexPath: IndexPath)
-    
+
 }
 
 class NewsFeedTableViewCell: UITableViewCell {

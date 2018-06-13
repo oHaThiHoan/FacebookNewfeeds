@@ -35,7 +35,7 @@ class ProfileViewController: UIViewController {
                                   forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         myFeedsTableView.dataSource = self
         myFeedsTableView.delegate = self
-        QueryService.get(context: self, url: Constants.profileUrl) { (response) in
+        QueryService.get(view: view, url: Constants.profileUrl, showIndicator: true) { (response) in
             guard let responseProfile = response["profile"] as? [String: Any] else {
                 return
             }

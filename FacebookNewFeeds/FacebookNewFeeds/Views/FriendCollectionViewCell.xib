@@ -20,8 +20,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="avatar" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-Qh-zNA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Oq-Qh-zNA">
                         <rect key="frame" x="3" y="3" width="44" height="44"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="44" id="Kns-HU-MMS"/>
                             <constraint firstAttribute="width" secondItem="2Oq-Qh-zNA" secondAttribute="height" multiplier="1:1" id="fQz-vu-tE3"/>
@@ -39,7 +40,4 @@
             </connections>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="avatar" width="1280" height="720"/>
-    </resources>
 </document>

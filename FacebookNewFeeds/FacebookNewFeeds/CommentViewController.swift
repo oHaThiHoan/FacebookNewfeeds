@@ -42,6 +42,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var reactLabel: UILabel!
     @IBOutlet weak var reactImageView: UIImageView!
     @IBOutlet weak var commentTableView: UITableView!
+    @IBOutlet weak var commentListView: UIView!
     var feedModel = FeedModel()
     var indexPath: IndexPath?
     var interactor: Interactor?
@@ -70,7 +71,7 @@ class CommentViewController: UIViewController {
             reactImageView.image = reactImageView.image?.transform( withNewColor: Constants.colorButtonUnReact)
             reactLabel.text = String (feedModel.reactionCount.formatUsingAbbrevation())
         }
-        QueryService.get(context: self, url: Constants.urlComment) { (response) in
+        QueryService.get(view: commentListView, url: Constants.urlComment, showIndicator: true) { (response) in
             guard let responseCommentData = response["comments"] as? [[String: Any]] else {
                 return
             }
@@ -85,7 +86,6 @@ class CommentViewController: UIViewController {
                 self.commentTableView.reloadData()
             }
         }
-
     }
 
     @IBAction func sendAction(_ sender: Any) {

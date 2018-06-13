@@ -758,38 +758,50 @@
                                             <constraint firstAttribute="height" constant="20" id="zd5-eX-12t"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="i77-6j-3bn">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ce7-lw-Ao5">
                                         <rect key="frame" x="0.0" y="45" width="375" height="542"/>
+                                        <subviews>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="R5E-xY-sYK">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="542"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            </tableView>
+                                        </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </tableView>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="R5E-xY-sYK" secondAttribute="bottom" id="1qo-tG-yds"/>
+                                            <constraint firstAttribute="trailing" secondItem="R5E-xY-sYK" secondAttribute="trailing" id="bgF-Q3-et3"/>
+                                            <constraint firstItem="R5E-xY-sYK" firstAttribute="top" secondItem="ce7-lw-Ao5" secondAttribute="top" id="tNi-P0-DN5"/>
+                                            <constraint firstItem="R5E-xY-sYK" firstAttribute="leading" secondItem="ce7-lw-Ao5" secondAttribute="leading" id="yvA-39-zPV"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="oYE-GW-HAW" firstAttribute="leading" secondItem="su2-LU-2hk" secondAttribute="leading" id="0aX-7n-3kp"/>
                                     <constraint firstItem="bHQ-Kg-p7u" firstAttribute="leading" secondItem="su2-LU-2hk" secondAttribute="leading" id="1qn-i6-Sf3"/>
                                     <constraint firstItem="21f-Mi-QLJ" firstAttribute="width" secondItem="Er6-LL-Ym9" secondAttribute="width" id="37c-jN-nNp"/>
+                                    <constraint firstItem="ce7-lw-Ao5" firstAttribute="top" secondItem="bHQ-Kg-p7u" secondAttribute="bottom" id="3e4-l4-0Du"/>
                                     <constraint firstItem="Er6-LL-Ym9" firstAttribute="width" secondItem="MxT-KS-MVh" secondAttribute="width" id="4fT-ug-qad"/>
                                     <constraint firstItem="Er6-LL-Ym9" firstAttribute="height" secondItem="MxT-KS-MVh" secondAttribute="height" id="574-dV-UPY"/>
                                     <constraint firstItem="DXg-yb-ps9" firstAttribute="centerY" secondItem="MxT-KS-MVh" secondAttribute="centerY" id="76r-DE-aEI"/>
-                                    <constraint firstItem="i77-6j-3bn" firstAttribute="top" secondItem="bHQ-Kg-p7u" secondAttribute="bottom" id="7JS-Py-7UW"/>
                                     <constraint firstAttribute="trailing" secondItem="bHQ-Kg-p7u" secondAttribute="trailing" id="8ia-Kx-dL6"/>
                                     <constraint firstItem="Er6-LL-Ym9" firstAttribute="top" secondItem="MxT-KS-MVh" secondAttribute="top" id="Bmk-km-hm1"/>
                                     <constraint firstItem="21f-Mi-QLJ" firstAttribute="leading" secondItem="Er6-LL-Ym9" secondAttribute="trailing" id="HiT-Kt-W3l"/>
-                                    <constraint firstAttribute="trailing" secondItem="i77-6j-3bn" secondAttribute="trailing" id="No6-JP-ZvR"/>
-                                    <constraint firstItem="i77-6j-3bn" firstAttribute="leading" secondItem="su2-LU-2hk" secondAttribute="leading" id="P0l-tU-6KK"/>
                                     <constraint firstItem="MxT-KS-MVh" firstAttribute="top" secondItem="su2-LU-2hk" secondAttribute="top" constant="16" id="Qs0-Jy-Xsa"/>
+                                    <constraint firstItem="oYE-GW-HAW" firstAttribute="top" secondItem="ce7-lw-Ao5" secondAttribute="bottom" id="THS-im-Imm"/>
                                     <constraint firstItem="cSd-1Z-q6F" firstAttribute="centerY" secondItem="21f-Mi-QLJ" secondAttribute="centerY" id="YDl-Gk-eDv"/>
                                     <constraint firstItem="MxT-KS-MVh" firstAttribute="leading" secondItem="su2-LU-2hk" secondAttribute="leading" constant="8" id="YLP-k3-qdE"/>
                                     <constraint firstAttribute="trailing" secondItem="DXg-yb-ps9" secondAttribute="trailing" constant="8" id="b6G-em-cpB"/>
                                     <constraint firstItem="21f-Mi-QLJ" firstAttribute="top" secondItem="Er6-LL-Ym9" secondAttribute="top" id="bco-TR-56I"/>
                                     <constraint firstItem="bHQ-Kg-p7u" firstAttribute="top" secondItem="DXg-yb-ps9" secondAttribute="bottom" constant="8" id="bvN-yV-pCx"/>
-                                    <constraint firstItem="oYE-GW-HAW" firstAttribute="top" secondItem="i77-6j-3bn" secondAttribute="bottom" id="cuh-Iq-H21"/>
                                     <constraint firstAttribute="bottom" secondItem="oYE-GW-HAW" secondAttribute="bottom" id="glt-ki-k4O"/>
                                     <constraint firstItem="cSd-1Z-q6F" firstAttribute="leading" secondItem="21f-Mi-QLJ" secondAttribute="trailing" constant="8" id="jlU-y4-tHf"/>
+                                    <constraint firstItem="ce7-lw-Ao5" firstAttribute="leading" secondItem="su2-LU-2hk" secondAttribute="leading" id="kQs-my-G39"/>
                                     <constraint firstItem="DXg-yb-ps9" firstAttribute="leading" secondItem="cSd-1Z-q6F" secondAttribute="trailing" constant="8" id="tqy-ub-18W"/>
                                     <constraint firstItem="Er6-LL-Ym9" firstAttribute="leading" secondItem="MxT-KS-MVh" secondAttribute="trailing" id="wHJ-qI-VI2"/>
                                     <constraint firstAttribute="trailing" secondItem="oYE-GW-HAW" secondAttribute="trailing" id="wnB-qZ-oyX"/>
                                     <constraint firstItem="21f-Mi-QLJ" firstAttribute="height" secondItem="Er6-LL-Ym9" secondAttribute="height" id="y7V-lX-Y2D"/>
+                                    <constraint firstAttribute="trailing" secondItem="ce7-lw-Ao5" secondAttribute="trailing" id="yep-4h-cOu"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -805,7 +817,8 @@
                         </connections>
                     </view>
                     <connections>
-                        <outlet property="commentTableView" destination="i77-6j-3bn" id="69K-q2-GU8"/>
+                        <outlet property="commentListView" destination="ce7-lw-Ao5" id="88A-da-jwe"/>
+                        <outlet property="commentTableView" destination="R5E-xY-sYK" id="9CT-mW-cwI"/>
                         <outlet property="commentTextView" destination="Ef2-am-DNQ" id="MA2-vr-Ut1"/>
                         <outlet property="commentView" destination="CRk-ds-yIw" id="y9Z-pR-Yxe"/>
                         <outlet property="contentView" destination="su2-LU-2hk" id="kLm-AQ-bcS"/>
