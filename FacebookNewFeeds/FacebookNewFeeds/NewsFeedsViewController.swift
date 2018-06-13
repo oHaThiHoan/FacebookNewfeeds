@@ -21,14 +21,17 @@ private struct Constants {
     public static let colorSearchBarBackground = "#2E4780"
     public static let numberNewsFeedShow = 10
     public static let commentViewController = "CommentViewController"
+    public static let pageStoriesViewControllerIdentifier = "PageStoriesViewController"
 }
 
 class NewsFeedsViewController: UIViewController {
 
     @IBOutlet weak var friendsCollectionView: UICollectionView!
     @IBOutlet weak var newsFeedTableView: UITableView!
+    @IBOutlet weak var heightOfTableView: NSLayoutConstraint!
+    @IBOutlet weak var scrollView: UIScrollView!
     var feedsArray: [FeedModel] = []
-    var storyArray: [StoryModel] = []
+    var storiesArray: [StoryModel] = []
     var feedsTempArray: [FeedModel] = []
     let interactor = Interactor()
 
@@ -36,14 +39,16 @@ class NewsFeedsViewController: UIViewController {
         super.viewDidLoad()
         setUpNavigationBarItems()
         friendsCollectionView.dataSource = self
+        friendsCollectionView.delegate = self
         friendsCollectionView.register(UINib(nibName: Constants.friendCollectionViewCellNibName, bundle: nil),
-                                       forCellWithReuseIdentifier: Constants.friendCollectionViewCellIdentifier)
+            forCellWithReuseIdentifier: Constants.friendCollectionViewCellIdentifier)
         newsFeedTableView.dataSource = self
         newsFeedTableView.delegate = self
+        scrollView.delegate = self
         newsFeedTableView.register(UINib(nibName: Constants.newsFeedTableViewCellNibName, bundle: nil),
-                                   forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
+            forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         newsFeedTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
-                                   forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
+            forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
         QueryService.get(view: view, url: Constants.url, showIndicator: true) { (response) in
             guard let responseFeedData = response["feeds"] as? [[String: Any]] else {
                 return
@@ -63,7 +68,7 @@ class NewsFeedsViewController: UIViewController {
             }
             for story in responseStoryData {
                 let storyModel = StoryModel.init(response: story)
-                self.storyArray.append(storyModel)
+                self.storiesArray.append(storyModel)
             }
             DispatchQueue.main.async {
                 self.friendsCollectionView.reloadData()
@@ -85,12 +90,35 @@ class NewsFeedsViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButton
     }
 
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let height = scrollView.frame.size.height
+        let contentYoffset = scrollView.contentOffset.y
+        let distanceFromBottom = scrollView.contentSize.height - contentYoffset
+        if distanceFromBottom < height {
+            let beginElement = feedsTempArray.count
+            var endElement = 0
+            if feedsArray.count > feedsTempArray.count + Constants.numberNewsFeedShow {
+                endElement = feedsTempArray.count + Constants.numberNewsFeedShow - 1
+            } else {
+                endElement = feedsArray.count - 1
+            }
+            if beginElement <= endElement {
+                for index in beginElement...endElement {
+                    feedsTempArray.append(feedsArray[index])
+                }
+                DispatchQueue.main.async {
+                    self.newsFeedTableView.reloadData()
+                }
+            }
+        }
+    }
+
 }
 
 extension NewsFeedsViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return storyArray.count
+        return storiesArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -100,8 +128,22 @@ extension NewsFeedsViewController: UICollectionViewDataSource {
             for: indexPath) as? FriendCollectionViewCell else {
                 return UICollectionViewCell()
         }
-        cell.setContent(storyModel: storyArray[indexPath.row])
+        cell.setContent(storyModel: storiesArray[indexPath.row])
         return cell
+    }
+
+}
+
+extension NewsFeedsViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let pageStoriesViewController = storyboard?.instantiateViewController(
+            withIdentifier: Constants.pageStoriesViewControllerIdentifier) as? PageStoriesViewController else {
+                return
+        }
+        pageStoriesViewController.beginPageIndex = indexPath.row
+        pageStoriesViewController.storiesArray = storiesArray
+        present(pageStoriesViewController, animated: true, completion: nil)
     }
 
 }
@@ -128,24 +170,7 @@ extension NewsFeedsViewController: UITableViewDataSource {
 extension NewsFeedsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let lastElement = feedsTempArray.count - 1
-        if indexPath.row == lastElement {
-            let beginElement = feedsTempArray.count
-            var endElement = 0
-            if feedsArray.count > (feedsTempArray.count + Constants.numberNewsFeedShow) {
-                endElement = feedsTempArray.count + Constants.numberNewsFeedShow - 1
-            } else {
-                endElement = feedsArray.count - 1
-            }
-            if beginElement <= endElement {
-                for index in beginElement...endElement {
-                    feedsTempArray.append(feedsArray[index])
-                }
-                DispatchQueue.main.async {
-                    self.newsFeedTableView.reloadData()
-                }
-            }
-        }
+        heightOfTableView.constant = newsFeedTableView.contentSize.height
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
