@@ -7,6 +7,10 @@
 //
 
 import UIKit
+private struct Constants {
+    public static let borderWidth: CGFloat = 1
+    public static let colorBorder: CGColor = UIColor.blue.cgColor
+}
 
 class FriendCollectionViewCell: UICollectionViewCell {
 
@@ -16,6 +20,8 @@ class FriendCollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         avatarImageView.layer.cornerRadius = avatarImageView.frame.width / 2
         avatarImageView.clipsToBounds = true
+        avatarImageView.layer.borderWidth = Constants.borderWidth
+        avatarImageView.layer.borderColor = Constants.colorBorder
     }
 
     public func setContent(storyModel: StoryModel) {

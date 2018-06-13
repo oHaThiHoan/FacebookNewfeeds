@@ -28,6 +28,8 @@
 		5773C63820CE776600F748E1 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5773C63620CE776600F748E1 /* CommentTableViewCell.xib */; };
 		577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927D820C12E5C003A9413 /* ProfileViewController.swift */; };
 		577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927DA20C144BE003A9413 /* ProfileModel.swift */; };
+		5779AF8D20D0B75B0074172E /* PageStoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779AF8C20D0B75B0074172E /* PageStoriesViewController.swift */; };
+		5779AF8F20D0B7780074172E /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779AF8E20D0B7780074172E /* StoryViewController.swift */; };
 		5788B1A120C4F941004E731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A020C4F941004E731E /* UIColor.swift */; };
 		5788B1A320C50E46004E731E /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A220C50E46004E731E /* UISearchBar.swift */; };
 		5788B1A520C51426004E731E /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A420C51426004E731E /* Int.swift */; };
@@ -75,6 +77,8 @@
 		5773C63620CE776600F748E1 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		577927D820C12E5C003A9413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		577927DA20C144BE003A9413 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		5779AF8C20D0B75B0074172E /* PageStoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageStoriesViewController.swift; sourceTree = "<group>"; };
+		5779AF8E20D0B7780074172E /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		5788B1A020C4F941004E731E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5788B1A220C50E46004E731E /* UISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBar.swift; sourceTree = "<group>"; };
 		5788B1A420C51426004E731E /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 				5734844320BEBA66005CE11F /* NewsFeedsViewController.swift */,
 				577927D820C12E5C003A9413 /* ProfileViewController.swift */,
 				5773C62F20CE2F4E00F748E1 /* CommentViewController.swift */,
+				5779AF8C20D0B75B0074172E /* PageStoriesViewController.swift */,
+				5779AF8E20D0B7780074172E /* StoryViewController.swift */,
 			);
 			path = FacebookNewFeeds;
 			sourceTree = "<group>";
@@ -364,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5779AF8F20D0B7780074172E /* StoryViewController.swift in Sources */,
 				577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */,
 				57CF2CB320CA705F0039C58E /* UIImage.swift in Sources */,
 				5734844920BEBA74005CE11F /* FeedModel.swift in Sources */,
@@ -392,6 +399,7 @@
 				576156B620CF7AF300DAC188 /* CommentModel.swift in Sources */,
 				579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */,
 				57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */,
+				5779AF8D20D0B75B0074172E /* PageStoriesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
