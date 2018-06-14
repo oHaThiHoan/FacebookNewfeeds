@@ -13,6 +13,8 @@ private struct Constants {
     public static let newsFeedTableViewCellIdentifier = "NewsFeedTableViewCell"
     public static let profileUrl = "https://www.mocky.io/v2/5b1111622f0000700034f21e"
     public static let colorSearchBarBackground = "#2E4780"
+    public static let colorTextFieldPlaceHolder: UIColor = .white
+    public static let profileViewHeight: CGFloat = 125
 }
 
 class ProfileViewController: UIViewController {
@@ -24,60 +26,73 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var studiedLocationLabel: UILabel!
     @IBOutlet weak var liveLocationLabel: UILabel!
     @IBOutlet weak var fromLocationLabel: UILabel!
-    @IBOutlet weak var myFeedsTableView: UITableView!
+    @IBOutlet weak var myFeedsTableView: UILoadingTableView!
     @IBOutlet weak var heightTableViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileView: UIView!
+    @IBOutlet weak var topProfileViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var searchTextField: UISearchTextField! {
+        didSet {
+            searchTextField.attribute = AttributeTextField(block: { (attribute) in
+                attribute.placeHolderColor = Constants.colorTextFieldPlaceHolder
+                attribute.placeHolderText = "Search"
+            })
+        }
+    }
+    @IBOutlet weak var backImageView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
     var profileModel = ProfileModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationItem()
         myFeedsTableView.register(UINib(nibName: Constants.newsFeedTableViewCellNibName, bundle: nil),
-                                  forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
+            forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         myFeedsTableView.dataSource = self
         myFeedsTableView.delegate = self
-        QueryService.get(view: view, url: Constants.profileUrl, showIndicator: true) { (response) in
-            guard let responseProfile = response["profile"] as? [String: Any] else {
-                return
-            }
-            self.profileModel = ProfileModel(response: responseProfile)
-            DispatchQueue.main.async {
-                self.setProfileToView()
-            }
+        scrollView.delegate = self
+        profileView.isHidden = true
+        topProfileViewConstraint.constant = 0
+        setProfileToView()
+        QueryService.get(view: myFeedsTableView.loadingView, url: Constants.profileUrl, showIndicator: true) {(response)
+            in
+                guard let responseProfile = response["profile"] as? [String: Any] else {
+                    return
+                }
+                self.profileModel = ProfileModel(response: responseProfile)
+                DispatchQueue.main.async {
+                    self.setProfileToView()
+                    self.profileView.isHidden = false
+                    self.topProfileViewConstraint.constant = Constants.profileViewHeight
+                }
         }
+
+        let tapGuesture = UITapGestureRecognizer(target: self, action: #selector(backButtonAction))
+        backImageView.addGestureRecognizer(tapGuesture)
+        backImageView.isUserInteractionEnabled = true
     }
 
     private func setProfileToView() {
+        fullNameLabel.text = profileModel.fullName
+        guard let avatarUrl = profileModel.avatarUrl else {
+            return
+        }
+
+        avatarImageView.setImageFromStringURL(stringURL: avatarUrl)
         guard let coverUrl = profileModel.coverUrl else {
             return
         }
         coverImageView.setImageFromStringURL(stringURL: coverUrl)
-        guard let avatarUrl = profileModel.avatarUrl else {
-            return
-        }
-        avatarImageView.setImageFromStringURL(stringURL: avatarUrl)
-        fullNameLabel.text = profileModel.fullName
         workLocationLabel.text = profileModel.workAt
         liveLocationLabel.text = profileModel.liveIn
         fromLocationLabel.text = profileModel.from
         self.myFeedsTableView.reloadData()
     }
 
-    func setNavigationItem() {
-        let searchBar = UISearchBar(frame: .zero, textFieldPlaceHolder: "Search",
-            textFieldBackground: UIColor(hexString: Constants.colorSearchBarBackground ), textFieldColor: .white)
-        let rightBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "message"),
-            style: .done, target: nil, action: nil)
-        let leftBarButton = UIBarButtonItem(image: #imageLiteral(resourceName: "arrow"),
-            style: .done, target: self, action: #selector(backButtonAction))
-        rightBarButton.tintColor = .white
-        navigationItem.titleView = searchBar
-        navigationItem.rightBarButtonItem = rightBarButton
-        navigationItem.leftBarButtonItem = leftBarButton
-        navigationController?.navigationBar.topItem?.title = " "
-    }
-
     @objc func backButtonAction() {
         navigationController?.popViewController(animated: true)
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.isScrollEnabled = scrollView.contentOffset.y < 0 ? false: true
     }
 
 }
@@ -105,6 +120,10 @@ extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         heightTableViewConstraint.constant = myFeedsTableView.contentSize.height
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.001
     }
 
 }

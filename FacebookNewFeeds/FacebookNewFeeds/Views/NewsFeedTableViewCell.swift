@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reactions
 
 private struct Constants {
     public static let imageAttachCollectionViewCellNibName = "ImageAttachCollectionViewCell"
@@ -21,8 +22,8 @@ private struct Constants {
 
 protocol  NewsFeedTableViewCellDelegate: class {
 
-    func tapToAvatar()
-    func clickLikeButton(indexPath: IndexPath)
+    func tapToAvatar(feedModel: FeedModel)
+    func clickLikeButton(indexPath: IndexPath, feedModel: FeedModel)
     func clickCommentButton(indexPath: IndexPath)
 
 }
@@ -39,12 +40,22 @@ class NewsFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var shareCountLabel: UILabel!
     @IBOutlet weak var commentCountLabel: UILabel!
     @IBOutlet weak var feedContentLabel: UILabel!
-    @IBOutlet weak var likeLabel: UILabel!
-    @IBOutlet weak var likeImageView: UIImageView!
     weak var delegate: NewsFeedTableViewCellDelegate?
     var numberImageAttach = 0
     var feedModel = FeedModel()
     var indexPath: IndexPath?
+    @IBOutlet weak var reactionButton: ReactionButton! {
+        didSet {
+            reactionButton.reactionSelector = ReactionSelector()
+            reactionButton.config = ReactionButtonConfig(block: { (config) in
+                config.iconMarging = 8
+                config.spacing = 4
+                config.font = UIFont(name: "HelveticaNeue", size: 12)
+                config.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
+                config.alignment = .left
+            })
+        }
+    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -55,10 +66,7 @@ class NewsFeedTableViewCell: UITableViewCell {
     }
 
     @objc func tapToAvatar() {
-        guard let delegate = delegate else {
-            return
-        }
-        delegate.tapToAvatar()
+        delegate?.tapToAvatar(feedModel: feedModel)
     }
 
     public func setContent(feedModel: FeedModel, indexPath: IndexPath) {
@@ -74,9 +82,11 @@ class NewsFeedTableViewCell: UITableViewCell {
         }
         createAtDateLabel.text = feedModel.createAt
         feedContentLabel.text = feedModel.feedContent
-        reactionCountLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
-        commentCountLabel.text = feedModel.commentCount.formatUsingAbbrevation() + " Comments"
-        shareCountLabel.text = feedModel.sharingCount.formatUsingAbbrevation() + " Shares"
+        reactionCountLabel.text = feedModel.reactionCount > 0 ? feedModel.reactionCount.formatUsingAbbrevation() : ""
+        commentCountLabel.text = feedModel.commentCount > 0 ?
+            feedModel.commentCount.formatUsingAbbrevation() + " Comments" : ""
+        shareCountLabel.text = feedModel.sharingCount > 0 ?
+            feedModel.sharingCount.formatUsingAbbrevation() + " Shares" : ""
         guard let feedImages = feedModel.feedImages else {
             return
         }
@@ -87,20 +97,13 @@ class NewsFeedTableViewCell: UITableViewCell {
         }
         photoView.addImageToStackView(images: feedImages)
         self.indexPath = indexPath
-        if feedModel.isReacted {
-            likeLabel.textColor = Constants.colorFeedReacted
-            likeImageView.image = likeImageView.image?.transform(withNewColor: Constants.colorFeedReacted)
-        } else {
-            likeLabel.textColor = Constants.colorFeedUnReacted
-            likeImageView.image = likeImageView.image?.transform(withNewColor: Constants.colorFeedUnReacted)
-        }
-    }
-
-    @IBAction func likeAction(_ sender: Any) {
-        guard let indexPath = indexPath else {
+        guard let reaction = feedModel.reaction else {
+            reactionButton.isSelected = false
+            reactionButton.reaction = Reaction.facebook.like
             return
         }
-        delegate?.clickLikeButton(indexPath: indexPath)
+        reactionButton.isSelected = true
+        reactionButton.reaction = reaction
     }
 
     @IBAction func commentAction(_ sender: Any) {
@@ -108,6 +111,32 @@ class NewsFeedTableViewCell: UITableViewCell {
             return
         }
         delegate?.clickCommentButton(indexPath: indexPath)
+    }
+
+    @IBAction func reactionAction(_ sender: Any) {
+        guard let indexPath = indexPath else {
+            return
+        }
+        if feedModel.reaction == nil {
+            feedModel.reactionCount += 1
+        }
+        feedModel.reaction = reactionButton.reaction
+        delegate?.clickLikeButton(indexPath: indexPath, feedModel: feedModel)
+    }
+
+    @IBAction func reactTouchUpInsideAction(_ sender: Any) {
+        if reactionButton.isSelected {
+            feedModel.reaction = reactionButton.reaction
+            feedModel.reactionCount += 1
+        } else {
+            feedModel.reaction = nil
+            feedModel.reactionCount -= 1
+            reactionButton.reaction = Reaction.facebook.like
+        }
+        guard let indexPath = indexPath else {
+            return
+        }
+        delegate?.clickLikeButton(indexPath: indexPath, feedModel: feedModel)
     }
 
 }

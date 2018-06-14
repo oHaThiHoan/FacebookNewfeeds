@@ -28,11 +28,14 @@
 		5773C63820CE776600F748E1 /* CommentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5773C63620CE776600F748E1 /* CommentTableViewCell.xib */; };
 		577927D920C12E5C003A9413 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927D820C12E5C003A9413 /* ProfileViewController.swift */; };
 		577927DB20C144BE003A9413 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577927DA20C144BE003A9413 /* ProfileModel.swift */; };
+		5779610E20D211A600E11F9B /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779610D20D211A600E11F9B /* UINavigationController.swift */; };
+		5779611020D219AE00E11F9B /* UISearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779610F20D219AE00E11F9B /* UISearchTextField.swift */; };
 		5779AF8D20D0B75B0074172E /* PageStoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779AF8C20D0B75B0074172E /* PageStoriesViewController.swift */; };
 		5779AF8F20D0B7780074172E /* StoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5779AF8E20D0B7780074172E /* StoryViewController.swift */; };
 		5788B1A120C4F941004E731E /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A020C4F941004E731E /* UIColor.swift */; };
 		5788B1A320C50E46004E731E /* UISearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A220C50E46004E731E /* UISearchBar.swift */; };
 		5788B1A520C51426004E731E /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5788B1A420C51426004E731E /* Int.swift */; };
+		5791ACE420D2497400F6DB80 /* UILoadingTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5791ACE320D2497400F6DB80 /* UILoadingTableView.swift */; };
 		579F13A120BBF00700FC9F13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 579F13A020BBF00700FC9F13 /* AppDelegate.swift */; };
 		579F13A620BBF00700FC9F13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 579F13A420BBF00700FC9F13 /* Main.storyboard */; };
 		579F13A820BBF00F00FC9F13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 579F13A720BBF00F00FC9F13 /* Assets.xcassets */; };
@@ -77,11 +80,14 @@
 		5773C63620CE776600F748E1 /* CommentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CommentTableViewCell.xib; sourceTree = "<group>"; };
 		577927D820C12E5C003A9413 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		577927DA20C144BE003A9413 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		5779610D20D211A600E11F9B /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		5779610F20D219AE00E11F9B /* UISearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchTextField.swift; sourceTree = "<group>"; };
 		5779AF8C20D0B75B0074172E /* PageStoriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageStoriesViewController.swift; sourceTree = "<group>"; };
 		5779AF8E20D0B7780074172E /* StoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryViewController.swift; sourceTree = "<group>"; };
 		5788B1A020C4F941004E731E /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		5788B1A220C50E46004E731E /* UISearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBar.swift; sourceTree = "<group>"; };
 		5788B1A420C51426004E731E /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		5791ACE320D2497400F6DB80 /* UILoadingTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILoadingTableView.swift; sourceTree = "<group>"; };
 		579F139D20BBF00700FC9F13 /* FacebookNewFeeds.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FacebookNewFeeds.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		579F13A020BBF00700FC9F13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		579F13A520BBF00700FC9F13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -133,6 +139,9 @@
 				5788B1A220C50E46004E731E /* UISearchBar.swift */,
 				5788B1A420C51426004E731E /* Int.swift */,
 				57CF2CB220CA705F0039C58E /* UIImage.swift */,
+				5779610D20D211A600E11F9B /* UINavigationController.swift */,
+				5779610F20D219AE00E11F9B /* UISearchTextField.swift */,
+				5791ACE320D2497400F6DB80 /* UILoadingTableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -330,14 +339,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-FacebookNewFeeds/Pods-FacebookNewFeeds-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/ADMozaicCollectionViewLayout/ADMozaicCollectionViewLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Reactions/Reactions.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ADMozaicCollectionViewLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reactions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,6 +394,7 @@
 				5788B1A320C50E46004E731E /* UISearchBar.swift in Sources */,
 				57CF2CA120CA15820039C58E /* PhotoView.swift in Sources */,
 				579F13D120BC05C700FC9F13 /* RegisterViewController.swift in Sources */,
+				5779611020D219AE00E11F9B /* UISearchTextField.swift in Sources */,
 				5734844420BEBA66005CE11F /* NewsFeedsViewController.swift in Sources */,
 				576156B320CF721400DAC188 /* LoadMoreCommentTableViewCell.swift in Sources */,
 				5734844A20BEBA74005CE11F /* QueryService.swift in Sources */,
@@ -394,10 +404,12 @@
 				5734845320BEBAAA005CE11F /* NewsFeedTableViewCell.swift in Sources */,
 				5734845220BEBAAA005CE11F /* ImageAttachCollectionViewCell.swift in Sources */,
 				5773C63720CE776600F748E1 /* CommentTableViewCell.swift in Sources */,
+				5791ACE420D2497400F6DB80 /* UILoadingTableView.swift in Sources */,
 				579F13A120BBF00700FC9F13 /* AppDelegate.swift in Sources */,
 				5788B1A520C51426004E731E /* Int.swift in Sources */,
 				576156B620CF7AF300DAC188 /* CommentModel.swift in Sources */,
 				579F13CF20BBF66600FC9F13 /* SignInViewController.swift in Sources */,
+				5779610E20D211A600E11F9B /* UINavigationController.swift in Sources */,
 				57CB61B820BFEFC9002880C2 /* StoryModel.swift in Sources */,
 				5779AF8D20D0B75B0074172E /* PageStoriesViewController.swift in Sources */,
 			);

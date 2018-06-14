@@ -1,26 +1,26 @@
 PODS:
-  - ADMozaicCollectionViewLayout (4.0.4)
   - Alamofire (4.7.2)
+  - Reactions (2.1.0)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
 
 DEPENDENCIES:
-  - ADMozaicCollectionViewLayout
   - Alamofire
+  - Reactions (~> 2.1.0)
   - SDWebImage (~> 4.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - ADMozaicCollectionViewLayout
     - Alamofire
+    - Reactions
     - SDWebImage
 
 SPEC CHECKSUMS:
-  ADMozaicCollectionViewLayout: 3145a65a65e5f1f5dc22dd31b2e9a03407259adf
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  Reactions: 5f1dca8d9e53e26713a6b76079a86cbaea7258aa
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
 
-PODFILE CHECKSUM: d3e8422d0fd8b971970f9d402636f834ac29e1ae
+PODFILE CHECKSUM: 5423e172b82ee40a1394f5b7412e83f87d4aaf9d
 
 COCOAPODS: 1.5.3
