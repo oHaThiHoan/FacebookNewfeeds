@@ -11,10 +11,7 @@ import UIKit
 private struct Constants {
     public static let newsFeedTableViewCellNibName = "NewsFeedTableViewCell"
     public static let newsFeedTableViewCellIdentifier = "NewsFeedTableViewCell"
-    public static let profileUrl = "https://www.mocky.io/v2/5b1111622f0000700034f21e"
-    public static let colorSearchBarBackground = "#2E4780"
-    public static let colorTextFieldPlaceHolder: UIColor = .white
-    public static let profileViewHeight: CGFloat = 125
+    public static let infoTableViewCellIdentifier = "InfoTableViewCell"
 }
 
 class ProfileViewController: UIViewController {
@@ -22,55 +19,55 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
-    @IBOutlet weak var workLocationLabel: UILabel!
-    @IBOutlet weak var studiedLocationLabel: UILabel!
-    @IBOutlet weak var liveLocationLabel: UILabel!
-    @IBOutlet weak var fromLocationLabel: UILabel!
     @IBOutlet weak var myFeedsTableView: UILoadingTableView!
     @IBOutlet weak var heightTableViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var profileView: UIView!
-    @IBOutlet weak var topProfileViewConstraint: NSLayoutConstraint!
+    @IBOutlet weak var infoTableView: UITableView!
+    @IBOutlet weak var heightInfoTableViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var searchTextField: UISearchTextField! {
         didSet {
             searchTextField.attribute = AttributeTextField(block: { (attribute) in
-                attribute.placeHolderColor = Constants.colorTextFieldPlaceHolder
+                attribute.placeHolderColor = CommonConstants.colorTextFieldPlaceHolder
                 attribute.placeHolderText = "Search"
             })
         }
     }
     @IBOutlet weak var backImageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-    var profileModel = ProfileModel()
+    var profileModel: ProfileModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        infoTableView.register(UITableViewCell.self, forCellReuseIdentifier: Constants.infoTableViewCellIdentifier)
+        infoTableView.delegate = self
+        infoTableView.dataSource = self
         myFeedsTableView.register(UINib(nibName: Constants.newsFeedTableViewCellNibName, bundle: nil),
             forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         myFeedsTableView.dataSource = self
         myFeedsTableView.delegate = self
         scrollView.delegate = self
-        profileView.isHidden = true
-        topProfileViewConstraint.constant = 0
         setProfileToView()
-        QueryService.get(view: myFeedsTableView.loadingView, url: Constants.profileUrl, showIndicator: true) {(response)
-            in
-                guard let responseProfile = response["profile"] as? [String: Any] else {
-                    return
-                }
-                self.profileModel = ProfileModel(response: responseProfile)
-                DispatchQueue.main.async {
-                    self.setProfileToView()
-                    self.profileView.isHidden = false
-                    self.topProfileViewConstraint.constant = Constants.profileViewHeight
-                }
-        }
-
+        let spinner = UIViewController.displaySpinner(onView: myFeedsTableView.loadingView)
+        QueryService.get(url: Url.profileUrl, success: { (response) in
+            guard let responseProfile = response["profile"] as? [String: Any] else {
+                return
+            }
+            self.profileModel = ProfileModel(response: responseProfile)
+            DispatchQueue.main.async {
+                self.setProfileToView()
+            }
+            UIViewController.removeSpinner(spinner: spinner)
+        }, failure: { (_) in
+            UIViewController.removeSpinner(spinner: spinner)
+        })
         let tapGuesture = UITapGestureRecognizer(target: self, action: #selector(backButtonAction))
         backImageView.addGestureRecognizer(tapGuesture)
         backImageView.isUserInteractionEnabled = true
     }
 
     private func setProfileToView() {
+        guard let profileModel = profileModel else {
+            return
+        }
         fullNameLabel.text = profileModel.fullName
         guard let avatarUrl = profileModel.avatarUrl else {
             return
@@ -81,10 +78,8 @@ class ProfileViewController: UIViewController {
             return
         }
         coverImageView.setImageFromStringURL(stringURL: coverUrl)
-        workLocationLabel.text = profileModel.workAt
-        liveLocationLabel.text = profileModel.liveIn
-        fromLocationLabel.text = profileModel.from
-        self.myFeedsTableView.reloadData()
+        myFeedsTableView.reloadData()
+        infoTableView.reloadData()
     }
 
     @objc func backButtonAction() {
@@ -100,18 +95,44 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return profileModel.feeds.count
+        guard let profileModel = profileModel else {
+            return 0
+        }
+        if tableView == myFeedsTableView {
+            return profileModel.feeds.count
+        } else if tableView == infoTableView {
+            return profileModel.infos.count
+        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.newsFeedTableViewCellIdentifier,
-            for: indexPath) as? NewsFeedTableViewCell else {
+        guard let profileModel = profileModel else {
             return UITableViewCell()
         }
-        let feedModel = profileModel.feeds[indexPath.row]
-        cell.setContent(feedModel: feedModel, indexPath: indexPath)
-        return cell
+        if tableView == myFeedsTableView {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.newsFeedTableViewCellIdentifier,
+                for: indexPath) as? NewsFeedTableViewCell else {
+                return UITableViewCell()
+            }
+
+            let feedModel = profileModel.feeds[indexPath.row]
+            cell.setContent(feedModel: feedModel, indexPath: indexPath)
+            return cell
+        } else if tableView == infoTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Constants.infoTableViewCellIdentifier,
+                for: indexPath)
+            let infoModel = profileModel.infos[indexPath.row]
+            guard let key = infoModel.key, let value = infoModel.value, let icon = infoModel.icon else {
+                return cell
+            }
+            cell.textLabel?.font = UIFont.systemFont(ofSize: CommonConstants.normalFontSize)
+            cell.textLabel?.text =  key + " " + value
+            cell.imageView?.image = UIImage(named: icon)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
 }
@@ -120,10 +141,15 @@ extension ProfileViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         heightTableViewConstraint.constant = myFeedsTableView.contentSize.height
+        heightInfoTableViewConstraint.constant = infoTableView.contentSize.height
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0.001
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 500.0
     }
 
 }
