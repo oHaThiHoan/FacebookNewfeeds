@@ -9,7 +9,7 @@
 import UIKit
 
 private struct Constants {
-    public static let colorSpinner = "#E0E0E0"
+    public static let colorSpinner = UIColor.clear
 }
 
 extension UIViewController {
@@ -17,13 +17,14 @@ extension UIViewController {
     class func displaySpinner(onView: UIView) -> UIView {
         let spinnerView = UIView(frame: onView.bounds)
         spinnerView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        spinnerView.backgroundColor = UIColor(hexString: Constants.colorSpinner)
-        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        spinnerView.backgroundColor = Constants.colorSpinner
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityIndicator.startAnimating()
         activityIndicator.center = spinnerView.center
 
         DispatchQueue.main.async {
             spinnerView.addSubview(activityIndicator)
+            spinnerView.center = onView.center
             onView.addSubview(spinnerView)
         }
 

@@ -16,12 +16,17 @@ private struct Constants {
     public static let loadMoreTableViewCellNibName = "LoadMoreTableViewCell"
     public static let loadMoreTableViewCellIdentifier = "LoadMoreTableViewCell"
     public static let heightLoadMoreCell: CGFloat = 44
-    public static let url = "https://www.mocky.io/v2/5b19e5ce3300006800fb122e"
+    public static let url = "https://www.mocky.io/v2/5b20e98630000088005c7221"
     public static let profileViewControllerIdentifier = "ProfileViewController"
     public static let colorSearchBarBackground = "#2E4780"
     public static let numberNewsFeedShow = 10
     public static let commentViewController = "CommentViewController"
     public static let pageStoriesViewControllerIdentifier = "PageStoriesViewController"
+    public static let collectionViewTopInset: CGFloat = 0
+    public static let collectionViewLeftInset: CGFloat = 5
+    public static let collectionViewBottomInset: CGFloat = 0
+    public static let collectionViewRightInset: CGFloat = 5
+    public static let colorTextFieldPlaceHolder: UIColor = .white
 }
 
 class NewsFeedsViewController: UIViewController {
@@ -30,6 +35,14 @@ class NewsFeedsViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     @IBOutlet weak var heightOfTableView: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var searchTextField: UISearchTextField! {
+        didSet {
+            searchTextField.attribute = AttributeTextField(block: { (attribute) in
+                attribute.placeHolderText = "Search"
+                attribute.placeHolderColor = Constants.colorTextFieldPlaceHolder
+            })
+        }
+    }
     var feedsArray: [FeedModel] = []
     var storiesArray: [StoryModel] = []
     var feedsTempArray: [FeedModel] = []
@@ -37,9 +50,11 @@ class NewsFeedsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpNavigationBarItems()
         friendsCollectionView.dataSource = self
         friendsCollectionView.delegate = self
+        friendsCollectionView.contentInset = UIEdgeInsets(top: Constants.collectionViewTopInset,
+            left: Constants.collectionViewLeftInset, bottom: Constants.collectionViewBottomInset,
+            right: Constants.collectionViewRightInset)
         friendsCollectionView.register(UINib(nibName: Constants.friendCollectionViewCellNibName, bundle: nil),
             forCellWithReuseIdentifier: Constants.friendCollectionViewCellIdentifier)
         newsFeedTableView.dataSource = self
@@ -49,7 +64,7 @@ class NewsFeedsViewController: UIViewController {
             forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         newsFeedTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
             forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
-        QueryService.get(view: view, url: Constants.url, showIndicator: true) { (response) in
+        QueryService.get(view: friendsCollectionView, url: Constants.url, showIndicator: true) { (response) in
             guard let responseFeedData = response["feeds"] as? [[String: Any]] else {
                 return
             }
@@ -91,6 +106,7 @@ class NewsFeedsViewController: UIViewController {
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        scrollView.isScrollEnabled = scrollView.contentOffset.y < 0 ? false: true
         let height = scrollView.frame.size.height
         let contentYoffset = scrollView.contentOffset.y
         let distanceFromBottom = scrollView.contentSize.height - contentYoffset
@@ -137,13 +153,18 @@ extension NewsFeedsViewController: UICollectionViewDataSource {
 extension NewsFeedsViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let pageStoriesViewController = storyboard?.instantiateViewController(
-            withIdentifier: Constants.pageStoriesViewControllerIdentifier) as? PageStoriesViewController else {
-                return
+        guard let cell = collectionView.cellForItem(at: indexPath) as? FriendCollectionViewCell else {
+            return
         }
-        pageStoriesViewController.beginPageIndex = indexPath.row
-        pageStoriesViewController.storiesArray = storiesArray
-        present(pageStoriesViewController, animated: true, completion: nil)
+        cell.clickImage { [weak self] in
+            guard let context = self, let pageStoriesViewController = context.storyboard?.instantiateViewController(
+                withIdentifier: Constants.pageStoriesViewControllerIdentifier) as? PageStoriesViewController else {
+                    return
+            }
+            pageStoriesViewController.beginPageIndex = indexPath.row
+            pageStoriesViewController.storiesArray = context.storiesArray
+            context.present(pageStoriesViewController, animated: true, completion: nil)
+        }
     }
 
 }
@@ -194,15 +215,9 @@ extension NewsFeedsViewController: UITableViewDelegate {
 
 extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
 
-    func clickLikeButton(indexPath: IndexPath) {
+    func clickLikeButton(indexPath: IndexPath, feedModel: FeedModel) {
         newsFeedTableView.beginUpdates()
-        if feedsTempArray[indexPath.row].isReacted {
-            feedsTempArray[indexPath.row].reactionCount -= 1
-            feedsTempArray[indexPath.row].isReacted = false
-        } else {
-            feedsTempArray[indexPath.row].reactionCount += 1
-            feedsTempArray[indexPath.row].isReacted = true
-        }
+        feedsTempArray[indexPath.row] = feedModel
         newsFeedTableView.reloadRows(at: [indexPath], with: .none)
         newsFeedTableView.endUpdates()
     }
@@ -220,11 +235,15 @@ extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
         present(commentViewController, animated: true, completion: nil)
     }
 
-    func tapToAvatar() {
+    func tapToAvatar(feedModel: FeedModel) {
         guard let profileViewController = storyboard?.instantiateViewController(
             withIdentifier: Constants.profileViewControllerIdentifier) as? ProfileViewController else {
                 return
         }
+        let profileModel = ProfileModel()
+        profileModel.avatarUrl = feedModel.avatarURL
+        profileModel.fullName = feedModel.fullName
+        profileViewController.profileModel = profileModel
         navigationController?.pushViewController(profileViewController, animated: true)
     }
 

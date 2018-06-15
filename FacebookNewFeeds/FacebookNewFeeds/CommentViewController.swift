@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Reactions
 
 protocol CommentControllerDelegate: class {
     func dismiss(feedModel: FeedModel, indexPath: IndexPath)
@@ -38,11 +39,22 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var commentView: UIView!
-    @IBOutlet weak var reactButton: UIButton!
     @IBOutlet weak var reactLabel: UILabel!
-    @IBOutlet weak var reactImageView: UIImageView!
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentListView: UIView!
+    @IBOutlet weak var reactionButton: ReactionButton! {
+        didSet {
+            reactionButton.reactionSelector = ReactionSelector()
+            reactionButton.config = ReactionButtonConfig(block: { (config) in
+                config.iconMarging = 8
+                config.spacing = 4
+                config.font = UIFont(name: "HelveticaNeue", size: 12)
+                config.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
+                config.alignment = .centerRight
+                config.nonTitle = true
+            })
+        }
+    }
     var feedModel = FeedModel()
     var indexPath: IndexPath?
     var interactor: Interactor?
@@ -63,14 +75,14 @@ class CommentViewController: UIViewController {
         commentTableView.register(UINib(nibName: Constants.commentCellNibName, bundle: nil),
             forCellReuseIdentifier: Constants.commentCellIdentifier)
         commentTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
-                                   forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
-        if feedModel.isReacted {
-            reactImageView.image = reactImageView.image?.transform( withNewColor: Constants.colorButtonReact)
-            reactLabel.text = " You and \((feedModel.reactionCount - 1).formatUsingAbbrevation()) others"
-        } else {
-            reactImageView.image = reactImageView.image?.transform( withNewColor: Constants.colorButtonUnReact)
-            reactLabel.text = String (feedModel.reactionCount.formatUsingAbbrevation())
+            forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
+        guard let reaction = feedModel.reaction else {
+            reactLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
+            return
         }
+        reactionButton.reaction = reaction
+        reactLabel.text = "You and \((feedModel.reactionCount - 1).formatUsingAbbrevation()) others"
+
         QueryService.get(view: commentListView, url: Constants.urlComment, showIndicator: true) { (response) in
             guard let responseCommentData = response["comments"] as? [[String: Any]] else {
                 return
@@ -128,16 +140,20 @@ class CommentViewController: UIViewController {
         }
     }
 
-    @IBAction func reactAction(_ sender: Any) {
-        if feedModel.isReacted {
-            reactImageView.image = reactImageView.image?.transform(withNewColor: Constants.colorButtonUnReact)
-            feedModel.isReacted = false
-            reactLabel.text = String (feedModel.reactionCount.formatUsingAbbrevation())
-        } else {
-            reactImageView.image = reactImageView.image?.transform(withNewColor: Constants.colorButtonReact)
-            feedModel.isReacted = true
+    @IBAction func reactTouchUpInside(_ sender: Any) {
+        if reactionButton.isSelected {
             reactLabel.text = " You and \(feedModel.reactionCount.formatUsingAbbrevation()) others"
+            feedModel.reaction = reactionButton.reaction
+        } else {
+            reactLabel.text = String (feedModel.reactionCount.formatUsingAbbrevation())
+            feedModel.reaction = nil
+            reactionButton.reaction = Reaction.facebook.like
         }
+    }
+
+    @IBAction func reactAction(_ sender: Any) {
+        reactLabel.text = " You and \(feedModel.reactionCount.formatUsingAbbrevation()) others"
+        feedModel.reaction = reactionButton.reaction
     }
 
     override func viewWillDisappear(_ animated: Bool) {
