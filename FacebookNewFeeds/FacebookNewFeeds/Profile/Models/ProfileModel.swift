@@ -12,12 +12,8 @@ class ProfileModel: NSObject {
     var fullName: String?
     var avatarUrl: String?
     var coverUrl: String?
-    var workAt: String?
-    var studiedAt: String?
-    var liveIn: String?
-    var from: String?
     var feeds = [FeedModel]()
-
+    var infos = [InfoModel]()
     override init() {
         super.init()
     }
@@ -33,18 +29,14 @@ class ProfileModel: NSObject {
         if let coverUrl = response["coverUrl"] as? String {
             self.coverUrl = coverUrl
         }
-        if let workAt = response["workAt"] as? String {
-            self.workAt = workAt
+
+        if let infos = response["infos"] as? [String: String] {
+            for info in infos {
+                let infoModel = InfoModel(key: info.key, value: info.value)
+                self.infos.append(infoModel)
+            }
         }
-        if let studiedAt = response["studiedAt"] as? String {
-            self.studiedAt = studiedAt
-        }
-        if let liveIn = response["liveIn"] as? String {
-            self.liveIn = liveIn
-        }
-        if let from = response["from"] as? String {
-            self.from = from
-        }
+
         if let feeds = response["feeds"] as? [[String: Any]] {
             for feed in feeds {
                 let feedModel = FeedModel(response: feed)

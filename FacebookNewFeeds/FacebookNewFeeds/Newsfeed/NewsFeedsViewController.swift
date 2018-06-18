@@ -16,9 +16,7 @@ private struct Constants {
     public static let loadMoreTableViewCellNibName = "LoadMoreTableViewCell"
     public static let loadMoreTableViewCellIdentifier = "LoadMoreTableViewCell"
     public static let heightLoadMoreCell: CGFloat = 44
-    public static let url = "https://www.mocky.io/v2/5b20e98630000088005c7221"
     public static let profileViewControllerIdentifier = "ProfileViewController"
-    public static let colorSearchBarBackground = "#2E4780"
     public static let numberNewsFeedShow = 10
     public static let commentViewController = "CommentViewController"
     public static let pageStoriesViewControllerIdentifier = "PageStoriesViewController"
@@ -26,7 +24,7 @@ private struct Constants {
     public static let collectionViewLeftInset: CGFloat = 5
     public static let collectionViewBottomInset: CGFloat = 0
     public static let collectionViewRightInset: CGFloat = 5
-    public static let colorTextFieldPlaceHolder: UIColor = .white
+    public static let estimateHeightRow: CGFloat = 500.0
 }
 
 class NewsFeedsViewController: UIViewController {
@@ -39,7 +37,7 @@ class NewsFeedsViewController: UIViewController {
         didSet {
             searchTextField.attribute = AttributeTextField(block: { (attribute) in
                 attribute.placeHolderText = "Search"
-                attribute.placeHolderColor = Constants.colorTextFieldPlaceHolder
+                attribute.placeHolderColor = CommonConstants.colorTextFieldPlaceHolder
             })
         }
     }
@@ -64,7 +62,8 @@ class NewsFeedsViewController: UIViewController {
             forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
         newsFeedTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
             forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
-        QueryService.get(view: friendsCollectionView, url: Constants.url, showIndicator: true) { (response) in
+        let spinner = UIViewController.displaySpinner(onView: friendsCollectionView)
+        QueryService.get(url: Url.newsFeedUrl, success: { (response) in
             guard let responseFeedData = response["feeds"] as? [[String: Any]] else {
                 return
             }
@@ -88,21 +87,10 @@ class NewsFeedsViewController: UIViewController {
             DispatchQueue.main.async {
                 self.friendsCollectionView.reloadData()
             }
-        }
-    }
-
-    private func setUpNavigationBarItems() {
-        let searchBar = UISearchBar(frame: .zero, textFieldPlaceHolder: "Search",
-            textFieldBackground: UIColor(hexString: Constants.colorSearchBarBackground), textFieldColor: .white)
-        let leftBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "camera"),
-            style: .done, target: nil, action: nil)
-        let rightBarButton = UIBarButtonItem.init(image: #imageLiteral(resourceName: "message"),
-            style: .done, target: nil, action: nil)
-        leftBarButton.tintColor = .white
-        rightBarButton.tintColor = .white
-        navigationItem.titleView = searchBar
-        navigationItem.leftBarButtonItem = leftBarButton
-        navigationItem.rightBarButtonItem = rightBarButton
+            UIViewController.removeSpinner(spinner: spinner)
+        }, failure: { (_) in
+            UIViewController.removeSpinner(spinner: spinner)
+        })
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -195,12 +183,12 @@ extension NewsFeedsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: Constants.loadMoreTableViewCellIdentifier)
+        return feedsTempArray.count == feedsArray.count ? UIView(frame: .zero) :
+            tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.loadMoreTableViewCellIdentifier)
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return feedsArray.count == feedsTempArray.count ? 0.0001 : Constants.heightLoadMoreCell
+        return Constants.heightLoadMoreCell
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -209,6 +197,10 @@ extension NewsFeedsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constants.estimateHeightRow
     }
 
 }

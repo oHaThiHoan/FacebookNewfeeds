@@ -27,7 +27,6 @@ private struct Constants {
     public static let commentCellIdentifier = "CommentTableViewCell"
     public static let loadMoreTableViewCellNibName = "LoadMoreCommentTableViewCell"
     public static let loadMoreTableViewCellIdentifier = "LoadMoreCommentTableViewCell"
-    public static let urlComment = "https://www.mocky.io/v2/5b1f4c023100006500230769"
     public static let numberCommentShow = 10
     public static let plusHeightOfTextView: CGFloat = 32
 }
@@ -76,14 +75,8 @@ class CommentViewController: UIViewController {
             forCellReuseIdentifier: Constants.commentCellIdentifier)
         commentTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
             forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
-        guard let reaction = feedModel.reaction else {
-            reactLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
-            return
-        }
-        reactionButton.reaction = reaction
-        reactLabel.text = "You and \((feedModel.reactionCount - 1).formatUsingAbbrevation()) others"
-
-        QueryService.get(view: commentListView, url: Constants.urlComment, showIndicator: true) { (response) in
+        let spinner = UIViewController.displaySpinner(onView: commentView)
+        QueryService.get(url: Url.commentUrl, success: { (response) in
             guard let responseCommentData = response["comments"] as? [[String: Any]] else {
                 return
             }
@@ -97,7 +90,16 @@ class CommentViewController: UIViewController {
             DispatchQueue.main.async {
                 self.commentTableView.reloadData()
             }
+            UIViewController.removeSpinner(spinner: spinner)
+        }, failure: { (_) in
+            UIViewController.removeSpinner(spinner: spinner)
+        })
+        guard let reaction = feedModel.reaction else {
+            reactLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
+            return
         }
+        reactionButton.reaction = reaction
+        reactLabel.text = "You and \((feedModel.reactionCount - 1).formatUsingAbbrevation()) others"
     }
 
     @IBAction func sendAction(_ sender: Any) {
