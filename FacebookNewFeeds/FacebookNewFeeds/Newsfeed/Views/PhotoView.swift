@@ -45,7 +45,7 @@ class PhotoView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed(Constants.photoViewNibName, owner: self, options: nil)
         addSubview(view)
-        view.frame = self.bounds
+        view.frame = bounds
         view.autoresizingMask = [ .flexibleWidth, .flexibleHeight]
     }
 

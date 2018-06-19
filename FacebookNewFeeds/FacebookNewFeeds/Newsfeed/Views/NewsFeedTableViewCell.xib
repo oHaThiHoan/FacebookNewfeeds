@@ -86,16 +86,12 @@
                             <constraint firstAttribute="height" constant="0.5" id="yxq-Qc-i4v"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGt-Ol-SCG" customClass="ReactionButton" customModule="Reactions">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SGt-Ol-SCG" customClass="ReactionButton" customModule="FacebookNewFeeds">
                         <rect key="frame" x="16" y="417.5" width="106.5" height="41"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="41" id="5Pt-AQ-1jF"/>
                         </constraints>
-                        <connections>
-                            <action selector="reactTouchUpInsideAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="enn-16-gSU"/>
-                            <action selector="reactionAction:" destination="KGk-i7-Jjw" eventType="valueChanged" id="GtS-TJ-vN6"/>
-                        </connections>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pNG-oF-chw">
                         <rect key="frame" x="110.5" y="417.5" width="99" height="41.5"/>
@@ -236,12 +232,12 @@
                 <outlet property="fullNameLabel" destination="69S-so-ASR" id="ntd-oY-gjH"/>
                 <outlet property="heightImageAttachCollectionView" destination="NPB-HR-YaO" id="PuR-66-GbF"/>
                 <outlet property="photoView" destination="lKR-1O-Zov" id="0MJ-E9-K0Z"/>
-                <outlet property="reactionButton" destination="SGt-Ol-SCG" id="n6z-r4-r0s"/>
+                <outlet property="reactionButton" destination="SGt-Ol-SCG" id="n0q-af-kbu"/>
                 <outlet property="reactionCountLabel" destination="TTy-KL-vqj" id="1xa-4c-V6x"/>
                 <outlet property="shareCountLabel" destination="kYr-sd-Sgw" id="xve-qI-Duy"/>
                 <outlet property="visibleModeImageView" destination="n0S-KN-oXu" id="Vlc-NC-kam"/>
             </connections>
-            <point key="canvasLocation" x="-528" y="196.5"/>
+            <point key="canvasLocation" x="-971" y="57"/>
         </tableViewCell>
     </objects>
     <resources>

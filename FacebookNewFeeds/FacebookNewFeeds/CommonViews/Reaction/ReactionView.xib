@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactionView" customModule="FacebookNewFeeds" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="iN0-l3-epB" id="7Zz-z7-QV3"/>
+                <outletCollection property="reactionAction" destination="cCy-31-cPJ" collectionClass="NSMutableArray" id="MC1-bT-sj2"/>
+                <outletCollection property="reactionAction" destination="xSi-Am-Qrt" collectionClass="NSMutableArray" id="xpz-cL-vTh"/>
+                <outletCollection property="reactionAction" destination="o8b-xb-2bb" collectionClass="NSMutableArray" id="mrF-EZ-0O7"/>
+                <outletCollection property="reactionAction" destination="Ff1-ge-PAa" collectionClass="NSMutableArray" id="D62-jR-asl"/>
+                <outletCollection property="reactionAction" destination="h58-7C-Tb5" collectionClass="NSMutableArray" id="NgJ-Ab-1u4"/>
+                <outletCollection property="reactionAction" destination="Ynb-zO-T80" collectionClass="NSMutableArray" id="xjd-BP-gAc"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="294" height="51"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cCy-31-cPJ">
+                    <rect key="frame" x="8" y="5.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="3vL-MS-mZa"/>
+                        <constraint firstAttribute="width" secondItem="cCy-31-cPJ" secondAttribute="height" multiplier="1:1" id="6M1-h7-gS9"/>
+                    </constraints>
+                    <state key="normal" image="like"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSi-Am-Qrt">
+                    <rect key="frame" x="56" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="SnA-dv-9Nz"/>
+                        <constraint firstAttribute="width" secondItem="xSi-Am-Qrt" secondAttribute="height" multiplier="1:1" id="yoc-3F-dGB"/>
+                    </constraints>
+                    <state key="normal" image="love"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8b-xb-2bb">
+                    <rect key="frame" x="104" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="6wN-Qb-Kh7"/>
+                        <constraint firstAttribute="width" secondItem="o8b-xb-2bb" secondAttribute="height" multiplier="1:1" id="KjC-Ai-kG5"/>
+                    </constraints>
+                    <state key="normal" image="wow"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ff1-ge-PAa">
+                    <rect key="frame" x="152" y="5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="0Yz-if-eXq"/>
+                        <constraint firstAttribute="width" secondItem="Ff1-ge-PAa" secondAttribute="height" multiplier="1:1" id="fgt-Mu-EUP"/>
+                    </constraints>
+                    <state key="normal" image="sad"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h58-7C-Tb5">
+                    <rect key="frame" x="200" y="5.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="TpJ-YN-1as"/>
+                        <constraint firstAttribute="width" secondItem="h58-7C-Tb5" secondAttribute="height" multiplier="1:1" id="jiy-rM-EBF"/>
+                    </constraints>
+                    <state key="normal" image="angry"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ynb-zO-T80">
+                    <rect key="frame" x="248" y="5.5" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Ynb-zO-T80" secondAttribute="height" multiplier="1:1" id="6fl-qQ-W68"/>
+                        <constraint firstAttribute="width" constant="40" id="hsC-iP-MWF"/>
+                    </constraints>
+                    <state key="normal" image="haha"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="xSi-Am-Qrt" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="0Mq-oa-FXH"/>
+                <constraint firstItem="xSi-Am-Qrt" firstAttribute="width" secondItem="xSi-Am-Qrt" secondAttribute="height" multiplier="1:1" id="42Y-bp-CFF"/>
+                <constraint firstItem="Ynb-zO-T80" firstAttribute="width" secondItem="Ynb-zO-T80" secondAttribute="height" multiplier="1:1" id="DzL-KV-8e3"/>
+                <constraint firstItem="cCy-31-cPJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="Fdl-0G-dYR"/>
+                <constraint firstItem="o8b-xb-2bb" firstAttribute="width" secondItem="o8b-xb-2bb" secondAttribute="height" multiplier="1:1" id="In7-Tb-8Q1"/>
+                <constraint firstItem="h58-7C-Tb5" firstAttribute="width" secondItem="h58-7C-Tb5" secondAttribute="height" multiplier="1:1" id="LQB-kf-7gr"/>
+                <constraint firstItem="Ff1-ge-PAa" firstAttribute="width" secondItem="Ff1-ge-PAa" secondAttribute="height" multiplier="1:1" id="PMD-cO-ibd"/>
+                <constraint firstItem="h58-7C-Tb5" firstAttribute="leading" secondItem="Ff1-ge-PAa" secondAttribute="trailing" constant="8" id="ft8-2C-NKV"/>
+                <constraint firstItem="h58-7C-Tb5" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="g1N-Ef-j4V"/>
+                <constraint firstItem="Ff1-ge-PAa" firstAttribute="leading" secondItem="o8b-xb-2bb" secondAttribute="trailing" constant="8" id="pE0-5p-ngA"/>
+                <constraint firstItem="Ff1-ge-PAa" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="rqF-wd-a8B"/>
+                <constraint firstItem="xSi-Am-Qrt" firstAttribute="leading" secondItem="cCy-31-cPJ" secondAttribute="trailing" constant="8" id="rwh-qi-K5C"/>
+                <constraint firstItem="Ynb-zO-T80" firstAttribute="leading" secondItem="h58-7C-Tb5" secondAttribute="trailing" constant="8" id="tan-Of-UC4"/>
+                <constraint firstItem="cCy-31-cPJ" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="tgg-0e-W5W"/>
+                <constraint firstItem="Ynb-zO-T80" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="u05-4j-AdF"/>
+                <constraint firstItem="o8b-xb-2bb" firstAttribute="leading" secondItem="xSi-Am-Qrt" secondAttribute="trailing" constant="8" id="vwD-zb-Axj"/>
+                <constraint firstItem="o8b-xb-2bb" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="zpL-RK-zq5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-292" y="-36.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="angry" width="81" height="81"/>
+        <image name="haha" width="81" height="81"/>
+        <image name="like" width="81" height="81"/>
+        <image name="love" width="81" height="81"/>
+        <image name="sad" width="81" height="81"/>
+        <image name="wow" width="81" height="81"/>
+    </resources>
+</document>

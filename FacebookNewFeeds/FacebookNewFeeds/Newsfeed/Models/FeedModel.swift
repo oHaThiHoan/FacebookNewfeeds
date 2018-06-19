@@ -7,17 +7,6 @@
 //
 
 import UIKit
-import Reactions
-
-public struct ReactionType {
-    public static let none = ""
-    public static let like = "like"
-    public static let love = "love"
-    public static let haha = "haha"
-    public static let wow = "wow"
-    public static let sad = "sad"
-    public static let angry = "angry"
-}
 
 class FeedModel: NSObject {
 
@@ -30,7 +19,7 @@ class FeedModel: NSObject {
     var commentCount = 0
     var sharingCount = 0
     var feedImages: [String]?
-    var reaction: Reaction?
+    var reaction: String?
 
     override init() {
         super.init()
@@ -64,29 +53,10 @@ class FeedModel: NSObject {
         if let responseImage = response["feedImages"] as? [String] {
             self.feedImages = responseImage
         }
-        if let reaction = response["reaction"] as? String, reaction != ReactionType.none {
-            self.reaction = convertStringToReactionType(string: reaction)
-        }
-    }
-
-    func convertStringToReactionType(string: String) -> Reaction {
-        switch string {
-        case ReactionType.none:
-            return Reaction(id: "", title: "", color: .clear, icon: UIImage())
-        case ReactionType.like:
-            return Reaction.facebook.like
-        case ReactionType.love:
-            return Reaction.facebook.love
-        case ReactionType.haha:
-            return Reaction.facebook.haha
-        case ReactionType.wow:
-            return Reaction.facebook.wow
-        case ReactionType.angry:
-            return Reaction.facebook.angry
-        case ReactionType.sad:
-            return Reaction.facebook.sad
-        default:
-            return Reaction(id: "", title: "", color: .clear, icon: UIImage())
+        if let reaction = response["reaction"] as? String {
+            self.reaction = reaction
+        } else {
+            reaction = ReactionType.none
         }
     }
 
