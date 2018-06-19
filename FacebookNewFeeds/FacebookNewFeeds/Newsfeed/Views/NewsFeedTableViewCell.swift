@@ -7,12 +7,11 @@
 //
 
 import UIKit
-import Reactions
 
 private struct Constants {
     public static let imageAttachCollectionViewCellNibName = "ImageAttachCollectionViewCell"
     public static let imageAttachCollectionViewCellIdentifier = "ImageAttachCollectionViewCell"
-    public static let heightCollectionView = 300
+    public static let heightCollectionView: CGFloat = 300
     public static let heightFeedContent = 50
     public static let visibleModePublic = "public"
     public static let visibleModeFriends = "friends"
@@ -41,21 +40,15 @@ class NewsFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var commentCountLabel: UILabel!
     @IBOutlet weak var feedContentLabel: UILabel!
     weak var delegate: NewsFeedTableViewCellDelegate?
+    @IBOutlet weak var reactionButton: ReactionButton! {
+        didSet {
+            reactionButton.parentView = contentView
+        }
+    }
+    @IBOutlet weak var shareImageView: UIImageView!
     var numberImageAttach = 0
     var feedModel = FeedModel()
     var indexPath: IndexPath?
-    @IBOutlet weak var reactionButton: ReactionButton! {
-        didSet {
-            reactionButton.reactionSelector = ReactionSelector()
-            reactionButton.config = ReactionButtonConfig(block: { (config) in
-                config.iconMarging = 8
-                config.spacing = 4
-                config.font = UIFont(name: "HelveticaNeue", size: 12)
-                config.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
-                config.alignment = .left
-            })
-        }
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -63,6 +56,7 @@ class NewsFeedTableViewCell: UITableViewCell {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapToAvatar))
         avatarImageView.isUserInteractionEnabled = true
         avatarImageView.addGestureRecognizer(tapGesture)
+        reactionButton.delegate = self
     }
 
     @objc func tapToAvatar() {
@@ -90,20 +84,15 @@ class NewsFeedTableViewCell: UITableViewCell {
         guard let feedImages = feedModel.feedImages else {
             return
         }
-        if feedImages.count == 0 {
-            heightImageAttachCollectionView.constant = 0
-        } else {
-            heightImageAttachCollectionView.constant = CGFloat(Constants.heightCollectionView)
-        }
+        heightImageAttachCollectionView.constant = feedImages.count == 0 ? 0 : Constants.heightCollectionView
         photoView.addImageToStackView(images: feedImages)
         self.indexPath = indexPath
-        guard let reaction = feedModel.reaction else {
+        guard let reaction = feedModel.reaction, reaction != ReactionType.none else {
             reactionButton.isSelected = false
-            reactionButton.reaction = Reaction.facebook.like
             return
         }
         reactionButton.isSelected = true
-        reactionButton.reaction = reaction
+        reactionButton.reactionType = reaction
     }
 
     @IBAction func commentAction(_ sender: Any) {
@@ -113,26 +102,26 @@ class NewsFeedTableViewCell: UITableViewCell {
         delegate?.clickCommentButton(indexPath: indexPath)
     }
 
-    @IBAction func reactionAction(_ sender: Any) {
-        guard let indexPath = indexPath else {
-            return
-        }
-        if feedModel.reaction == nil {
-            feedModel.reactionCount += 1
-        }
-        feedModel.reaction = reactionButton.reaction
-        delegate?.clickLikeButton(indexPath: indexPath, feedModel: feedModel)
+    @IBAction func shareAction(_ sender: Any) {
+        let reactionView = ReactionView(view: contentView, alignment: .right)
+        contentView.addSubview(reactionView)
+        reactionView.showAnimate()
     }
 
-    @IBAction func reactTouchUpInsideAction(_ sender: Any) {
+}
+
+extension NewsFeedTableViewCell: ReactionButtonDelegate {
+
+    func changeValue() {
         if reactionButton.isSelected {
-            feedModel.reaction = reactionButton.reaction
-            feedModel.reactionCount += 1
+            if feedModel.reaction == ReactionType.none {
+                feedModel.reactionCount += 1
+            }
         } else {
-            feedModel.reaction = nil
             feedModel.reactionCount -= 1
-            reactionButton.reaction = Reaction.facebook.like
         }
+        reactionCountLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
+        feedModel.reaction = reactionButton.reactionType
         guard let indexPath = indexPath else {
             return
         }

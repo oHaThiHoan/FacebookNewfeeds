@@ -208,10 +208,7 @@ extension NewsFeedsViewController: UITableViewDelegate {
 extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
 
     func clickLikeButton(indexPath: IndexPath, feedModel: FeedModel) {
-        newsFeedTableView.beginUpdates()
         feedsTempArray[indexPath.row] = feedModel
-        newsFeedTableView.reloadRows(at: [indexPath], with: .none)
-        newsFeedTableView.endUpdates()
     }
 
     func clickCommentButton(indexPath: IndexPath) {

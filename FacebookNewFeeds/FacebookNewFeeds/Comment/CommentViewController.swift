@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Reactions
 
 protocol CommentControllerDelegate: class {
     func dismiss(feedModel: FeedModel, indexPath: IndexPath)
@@ -43,15 +42,7 @@ class CommentViewController: UIViewController {
     @IBOutlet weak var commentListView: UIView!
     @IBOutlet weak var reactionButton: ReactionButton! {
         didSet {
-            reactionButton.reactionSelector = ReactionSelector()
-            reactionButton.config = ReactionButtonConfig(block: { (config) in
-                config.iconMarging = 8
-                config.spacing = 4
-                config.font = UIFont(name: "HelveticaNeue", size: 12)
-                config.neutralTintColor = UIColor(red: 0.47, green: 0.47, blue: 0.47, alpha: 1)
-                config.alignment = .centerRight
-                config.nonTitle = true
-            })
+            reactionButton.label.isHidden = true
         }
     }
     var feedModel = FeedModel()
@@ -71,6 +62,7 @@ class CommentViewController: UIViewController {
         commentTextView.delegate = self
         commentTableView.delegate = self
         commentTableView.dataSource = self
+        reactionButton.delegate = self
         commentTableView.register(UINib(nibName: Constants.commentCellNibName, bundle: nil),
             forCellReuseIdentifier: Constants.commentCellIdentifier)
         commentTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
@@ -94,11 +86,12 @@ class CommentViewController: UIViewController {
         }, failure: { (_) in
             UIViewController.removeSpinner(spinner: spinner)
         })
-        guard let reaction = feedModel.reaction else {
+        guard let reaction = feedModel.reaction, reaction != ReactionType.none else {
             reactLabel.text = feedModel.reactionCount.formatUsingAbbrevation()
             return
         }
-        reactionButton.reaction = reaction
+        reactionButton.isSelected = true
+        reactionButton.reactionType = reaction
         reactLabel.text = "You and \((feedModel.reactionCount - 1).formatUsingAbbrevation()) others"
     }
 
@@ -142,22 +135,6 @@ class CommentViewController: UIViewController {
         }
     }
 
-    @IBAction func reactTouchUpInside(_ sender: Any) {
-        if reactionButton.isSelected {
-            reactLabel.text = " You and \(feedModel.reactionCount.formatUsingAbbrevation()) others"
-            feedModel.reaction = reactionButton.reaction
-        } else {
-            reactLabel.text = String (feedModel.reactionCount.formatUsingAbbrevation())
-            feedModel.reaction = nil
-            reactionButton.reaction = Reaction.facebook.like
-        }
-    }
-
-    @IBAction func reactAction(_ sender: Any) {
-        reactLabel.text = " You and \(feedModel.reactionCount.formatUsingAbbrevation()) others"
-        feedModel.reaction = reactionButton.reaction
-    }
-
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         guard let indexPath = self.indexPath else {
@@ -166,6 +143,18 @@ class CommentViewController: UIViewController {
         delegate?.dismiss(feedModel: feedModel, indexPath: indexPath)
     }
 
+}
+extension CommentViewController: ReactionButtonDelegate {
+
+    func changeValue() {
+        if reactionButton.isSelected {
+            reactLabel.text = " You and \(feedModel.reactionCount.formatUsingAbbrevation()) others"
+            feedModel.reaction = reactionButton.reactionType
+        } else {
+            reactLabel.text = String (feedModel.reactionCount.formatUsingAbbrevation())
+            feedModel.reaction = ReactionType.none
+        }
+    }
 }
 
 extension CommentViewController: UITextViewDelegate {

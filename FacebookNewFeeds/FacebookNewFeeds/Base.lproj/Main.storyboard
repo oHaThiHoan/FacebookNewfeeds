@@ -747,17 +747,13 @@
                                             <constraint firstAttribute="trailing" secondItem="Ubr-GZ-OG2" secondAttribute="trailing" id="jCf-PW-SYz"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXg-yb-ps9" customClass="ReactionButton" customModule="Reactions">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXg-yb-ps9" customClass="ReactionButton" customModule="FacebookNewFeeds">
                                         <rect key="frame" x="317" y="1" width="50" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="ooK-HB-3um"/>
                                             <constraint firstAttribute="height" constant="50" id="zd5-eX-12t"/>
                                         </constraints>
-                                        <connections>
-                                            <action selector="reactAction:" destination="BKM-Wu-Gqj" eventType="valueChanged" id="0NJ-gV-xfq"/>
-                                            <action selector="reactTouchUpInside:" destination="BKM-Wu-Gqj" eventType="touchUpInside" id="bca-vF-Qt7"/>
-                                        </connections>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ce7-lw-Ao5">
                                         <rect key="frame" x="0.0" y="60" width="375" height="527"/>
