@@ -23,8 +23,9 @@ class ReactionButton: UIView {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!
     var parentView: UIView?
-    var isShowed = false
+    var alignment = Aligment.topLeft
     var isSelected = false
+    var isShowReactionView = false
     var reactionType = ReactionType.none {
         didSet {
             update(reactionType: reactionType)
@@ -47,16 +48,17 @@ class ReactionButton: UIView {
         addSubview(view)
         view.frame = bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        button.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTap)))
+        button.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longTap(_:))))
     }
 
-    @objc func longTap() {
-        if let parentView = parentView, !isShowed {
-            let reactionView = ReactionView(view: parentView, alignment: .left)
+    @objc func longTap(_ gesture: UILongPressGestureRecognizer) {
+        if let parentView = parentView, !isShowReactionView {
+            let reactionView = ReactionView(view: parentView, alignment: alignment,
+                position: gesture.location(in: parentView))
             parentView.addSubview(reactionView)
-            reactionView.showAnimate()
             reactionView.delegate = self
-            isShowed = true
+            reactionView.showAnimate()
+            isShowReactionView = true
         }
     }
 
@@ -93,6 +95,10 @@ class ReactionButton: UIView {
 
 extension ReactionButton: ReactionViewDelegate {
 
+    func removeReactionView() {
+        isShowReactionView = false
+    }
+
     func selectedReaction(reactionType: String) {
         self.reactionType = reactionType
         image.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewAnimate,
@@ -103,7 +109,6 @@ extension ReactionButton: ReactionViewDelegate {
         }, completion: { (finish) in
             if finish {
                 self.isSelected = true
-                self.isShowed = false
                 self.delegate?.changeValue()
             }
         })

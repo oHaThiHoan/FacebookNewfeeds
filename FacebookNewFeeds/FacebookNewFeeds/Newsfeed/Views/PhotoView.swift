@@ -17,6 +17,7 @@ private struct Constants {
     public static let restLabelHeight: CGFloat = 50
     public static let ratioImageVertical: Double = 16 / 9
     public static let ratioImageRectagle: Double = 1
+    public static let space: CGFloat = 1
 }
 
 enum PhotoLayout {
@@ -49,137 +50,50 @@ class PhotoView: UIView {
         view.autoresizingMask = [ .flexibleWidth, .flexibleHeight]
     }
 
-    public func addImageToStackView (images: [String]) {
+    public func addImageToStackView (images: [AttachImageModel]) {
         for view in stackView.subviews {
             view.removeFromSuperview()
         }
         if images.count == 1 {
-            addOneImage(image: images[0], toStackView: stackView)
+            stackView.addArrangedSubview(AttactImage(attachModel: images[0]).itemView)
         } else if images.count == 2 {
-            for index in 0...1 {
-                addOneImage(image: images[index], toStackView: stackView)
-            }
+            stackView.addArrangedSubview(AttactImage(attachModel: images[0]).itemView)
+            stackView.addArrangedSubview(AttactImage(attachModel: images[1]).itemView)
         } else if images.count == 3 {
-            addThreeImage(images: images, toStackView: stackView)
+            let subStackView = createStackViewWith(axis: .vertical)
+            subStackView.addArrangedSubview(AttactImage(attachModel: images[1]).itemView)
+            subStackView.addArrangedSubview(AttactImage(attachModel: images[2]).itemView)
+            stackView.addArrangedSubview(AttactImage(attachModel: images[0]).itemView)
+            stackView.addArrangedSubview(subStackView)
         } else if images.count >= 4 {
-            addFourImage(images: images, toStackView: stackView)
-        }
-    }
-
-    private func addOneImage(image: String, toStackView: UIStackView) {
-        let imageView = UIImageView()
-        imageView.setImageFromStringURL(stringURL: image)
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        toStackView.addArrangedSubview(imageView)
-    }
-
-    private func addThreeImage(images: [String], toStackView: UIStackView) {
-        var attachImageArray: [AttactImage] = []
-        var firstImageView = AttactImage(url: images[0])
-        var firstImageViewIndex = 0
-        for index in 0...2 {
-            let attachImage = AttactImage(url: images[index])
-            attachImageArray.append(attachImage)
-            if attachImage.ratio < firstImageView.ratio {
-                firstImageView = attachImage
-                firstImageViewIndex = index
-            }
-        }
-        attachImageArray.remove(at: firstImageViewIndex)
-        attachImageArray.insert(firstImageView, at: 0)
-        if firstImageView.ratio > Constants.ratioImageVertical {
-            photoLayout = PhotoLayout.oneVerticalTwoHorizontal
-        } else {
-            photoLayout = PhotoLayout.oneHorizontalTwoVertical
-        }
-        guard let photoLayout = photoLayout else {
-            return
-        }
-        drawImage(images: attachImageArray, photoLayout: photoLayout, stackView: stackView)
-    }
-
-    private func drawImage( images: [AttactImage], photoLayout: PhotoLayout, stackView: UIStackView) {
-        if photoLayout == PhotoLayout.oneHorizontalTwoVertical {
-            let righStackView = initStackView()
-            righStackView.axis = .vertical
             stackView.axis = .horizontal
-            stackView.addArrangedSubview(images[0].imageView)
-            righStackView.addArrangedSubview(images[1].imageView)
-            righStackView.addArrangedSubview(images[2].imageView)
-            stackView.addArrangedSubview(righStackView)
-        } else if photoLayout == PhotoLayout.oneVerticalTwoHorizontal {
-            let righStackView = initStackView()
-            righStackView.axis = .horizontal
-            stackView.axis = .vertical
-            stackView.addArrangedSubview(images[0].imageView)
-            righStackView.addArrangedSubview(images[1].imageView)
-            righStackView.addArrangedSubview(images[2].imageView)
-            stackView.addArrangedSubview(righStackView)
-        } else if photoLayout == PhotoLayout.twoVerticalTwoHorizontal {
-            let aboveStackView = initStackView()
-            aboveStackView.axis = .vertical
-            aboveStackView.addArrangedSubview(images[0].imageView)
-            aboveStackView.addArrangedSubview(images[1].imageView)
-            let belowStackView = initStackView()
-            belowStackView.axis = .vertical
-            belowStackView.addArrangedSubview(images[2].imageView)
-            let lastImageView = images [3].imageView
-            lastImageView.addSubview(initRestLabel(restNumber: (images.count - 4), imageView: lastImageView))
+            let aboveStackView = createStackViewWith(axis: .vertical)
+            aboveStackView.addArrangedSubview(AttactImage(attachModel: images[0]).itemView)
+            aboveStackView.addArrangedSubview(AttactImage(attachModel: images[1]).itemView)
+            let belowStackView = createStackViewWith(axis: .vertical)
+            belowStackView.addArrangedSubview(AttactImage(attachModel: images[2]).itemView)
+            let lastImageView = AttactImage(attachModel: images[3]).itemView
+            if images.count > 4 {
+                lastImageView.addSubview(createRestLabel(restNumber: "+\(images.count - 4)"))
+            }
             belowStackView.addArrangedSubview(lastImageView)
             stackView.addArrangedSubview(aboveStackView)
             stackView.addArrangedSubview(belowStackView)
-        } else if photoLayout == PhotoLayout.oneVerticalThreeHorizontal {
-            stackView.addArrangedSubview(images[0].imageView)
-            let rightStackView =  initStackView()
-            rightStackView.axis = .vertical
-            rightStackView.addArrangedSubview(images[1].imageView)
-            rightStackView.addArrangedSubview(images[2].imageView)
-            let lastImageView = images [3].imageView
-            lastImageView.addSubview(initRestLabel(restNumber: (images.count - 4), imageView: lastImageView))
-            rightStackView.addArrangedSubview(lastImageView)
-            stackView.addArrangedSubview(rightStackView)
         }
     }
 
-    private func addFourImage(images: [String], toStackView: UIStackView) {
-        var attachImageArray: [AttactImage] = []
-        var firstImageView = AttactImage(url: images[0])
-        var firstImageViewIndex = 0
-        for index in 0...3 {
-            let attachImage = AttactImage(url: images[index])
-            attachImageArray.append(attachImage)
-            if attachImage.ratio < firstImageView.ratio {
-                firstImageView = attachImage
-                firstImageViewIndex = index
-            }
-        }
-        if firstImageView.ratio == Constants.ratioImageRectagle {
-            photoLayout = PhotoLayout.twoVerticalTwoHorizontal
-        } else {
-            attachImageArray.remove(at: firstImageViewIndex)
-            attachImageArray.insert(firstImageView, at: 0)
-            photoLayout = PhotoLayout.oneVerticalThreeHorizontal
-        }
-        guard let photoLayout = photoLayout else {
-            return
-        }
-        drawImage(images: attachImageArray, photoLayout: photoLayout, stackView: toStackView)
-    }
-
-    private func initStackView() -> UIStackView {
+    private func createStackViewWith(axis: UILayoutConstraintAxis) -> UIStackView {
         let subStackView = UIStackView()
         subStackView.distribution = .fillEqually
-        subStackView.spacing = 1
+        subStackView.spacing = Constants.space
+        subStackView.axis = axis
         return subStackView
     }
 
-    private func initRestLabel(restNumber: Int, imageView: UIImageView) -> UILabel {
-        let restLabel = UILabel(frame: CGRect(x: Constants.restLabelX,
-             y: imageView.frame.height / 2, width: Constants.restLableWidth, height: Constants.restLabelHeight))
-        if restNumber > 0 {
-            restLabel.text = String(restNumber)
-        }
+    private func createRestLabel(restNumber: String) -> UILabel {
+        let restLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        restLabel.text = restNumber
+        restLabel.textAlignment = .center
         restLabel.textColor = Constants.restLabelColor
         return restLabel
     }

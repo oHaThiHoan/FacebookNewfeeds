@@ -40,11 +40,7 @@ class NewsFeedTableViewCell: UITableViewCell {
     @IBOutlet weak var commentCountLabel: UILabel!
     @IBOutlet weak var feedContentLabel: UILabel!
     weak var delegate: NewsFeedTableViewCellDelegate?
-    @IBOutlet weak var reactionButton: ReactionButton! {
-        didSet {
-            reactionButton.parentView = contentView
-        }
-    }
+    @IBOutlet weak var reactionButton: ReactionButton!
     @IBOutlet weak var shareImageView: UIImageView!
     var numberImageAttach = 0
     var feedModel = FeedModel()
@@ -63,7 +59,7 @@ class NewsFeedTableViewCell: UITableViewCell {
         delegate?.tapToAvatar(feedModel: feedModel)
     }
 
-    public func setContent(feedModel: FeedModel, indexPath: IndexPath) {
+    public func setContent(feedModel: FeedModel, indexPath: IndexPath, view: UIView? = nil) {
         self.feedModel = feedModel
         if let avatarUrl = feedModel.avatarURL {
             avatarImageView.setImageFromStringURL(stringURL: avatarUrl)
@@ -87,12 +83,13 @@ class NewsFeedTableViewCell: UITableViewCell {
         heightImageAttachCollectionView.constant = feedImages.count == 0 ? 0 : Constants.heightCollectionView
         photoView.addImageToStackView(images: feedImages)
         self.indexPath = indexPath
-        guard let reaction = feedModel.reaction, reaction != ReactionType.none else {
+        reactionButton.parentView = view
+        if let reaction = feedModel.reaction, reaction != ReactionType.none {
+            reactionButton.isSelected = true
+            reactionButton.reactionType = reaction
+        } else {
             reactionButton.isSelected = false
-            return
         }
-        reactionButton.isSelected = true
-        reactionButton.reactionType = reaction
     }
 
     @IBAction func commentAction(_ sender: Any) {
@@ -100,12 +97,6 @@ class NewsFeedTableViewCell: UITableViewCell {
             return
         }
         delegate?.clickCommentButton(indexPath: indexPath)
-    }
-
-    @IBAction func shareAction(_ sender: Any) {
-        let reactionView = ReactionView(view: contentView, alignment: .right)
-        contentView.addSubview(reactionView)
-        reactionView.showAnimate()
     }
 
 }
