@@ -45,9 +45,11 @@ class NewsFeedsViewController: UIViewController {
     var storiesArray: [StoryModel] = []
     var feedsTempArray: [FeedModel] = []
     let interactor = Interactor()
+    @IBOutlet weak var cameraImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        cameraImageView.isUserInteractionEnabled = true
         friendsCollectionView.dataSource = self
         friendsCollectionView.delegate = self
         friendsCollectionView.contentInset = UIEdgeInsets(top: Constants.collectionViewTopInset,
@@ -115,6 +117,7 @@ class NewsFeedsViewController: UIViewController {
                 }
             }
         }
+
     }
 
 }
@@ -169,7 +172,7 @@ extension NewsFeedsViewController: UITableViewDataSource {
                 return UITableViewCell()
         }
         let feedModel = feedsTempArray[indexPath.row]
-        cell.setContent(feedModel: feedModel, indexPath: indexPath)
+        cell.setContent(feedModel: feedModel, indexPath: indexPath, view: view)
         cell.delegate = self
         return cell
     }

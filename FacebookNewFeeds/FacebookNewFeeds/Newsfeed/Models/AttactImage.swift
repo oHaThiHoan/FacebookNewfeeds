@@ -8,26 +8,35 @@
 
 import UIKit
 
+public struct FileType {
+    public static let video = "video"
+    public static let image = "image"
+}
+
 class AttactImage: NSObject {
     var width = 0.0
     var height = 0.0
     var ratio = 0.0
     var image: UIImage?
-    var imageView = UIImageView()
+    var itemView = UIView()
     var url: String?
 
-    init(url: String) {
+    init(attachModel: AttachImageModel) {
         super.init()
-        self.url = url
-        imageView.setImageFromStringURL(stringURL: url)
-        imageView.contentMode = .scaleAspectFill
-        imageView.layer.masksToBounds = true
-        guard let imageFromUrl = imageView.image else {
-            return
+        self.url = attachModel.url
+        let fileType = attachModel.type
+        if FileType.image == fileType {
+            let itemView = UIImageView()
+            self.itemView = itemView
+            itemView.setImageFromStringURL(stringURL: attachModel.url)
+            itemView.contentMode = .scaleAspectFill
+            itemView.layer.masksToBounds = true
+        } else if FileType.video == fileType,
+            let itemView = UINib(nibName: "VideoView", bundle: nil).instantiate(withOwner: nil, options: nil).first
+            as? VideoView {
+            self.itemView = itemView
+            itemView.configure(url: attachModel.url)
         }
-        image = imageFromUrl
-        width = Double(imageFromUrl.size.width)
-        height = Double(imageFromUrl.size.height)
-        ratio = width / height
     }
+
 }

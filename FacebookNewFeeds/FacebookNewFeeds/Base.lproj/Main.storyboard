@@ -280,6 +280,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="kji-OC-mbS"/>
                     <connections>
+                        <outlet property="cameraImageView" destination="fjZ-TH-nyC" id="mwI-Vj-Qhm"/>
                         <outlet property="friendsCollectionView" destination="UEA-nC-H1a" id="ypH-zE-mlp"/>
                         <outlet property="heightOfTableView" destination="3ey-EV-HDV" id="AGu-hX-xyM"/>
                         <outlet property="newsFeedTableView" destination="hVf-Hg-xkR" id="Qal-c6-MSc"/>
@@ -922,10 +923,10 @@
             </objects>
             <point key="canvasLocation" x="4413" y="611"/>
         </scene>
-        <!--Tabbar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="oIS-VM-VCq">
             <objects>
-                <tabBarController storyboardIdentifier="TabbarViewController" automaticallyAdjustsScrollViewInsets="NO" id="Uj5-2m-991" customClass="TabbarViewController" customModule="FacebookNewFeeds" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabbarViewController" automaticallyAdjustsScrollViewInsets="NO" id="Uj5-2m-991" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="BRF-tb-G8I">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -939,6 +940,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4D8-zW-XiM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="879" y="-116"/>
+        </scene>
+        <!--Photo Show View Controller-->
+        <scene sceneID="Sah-3S-8u0">
+            <objects>
+                <viewController storyboardIdentifier="PhotoShowViewController" id="rRK-7M-bUB" customClass="PhotoShowViewController" customModule="FacebookNewFeeds" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4f2-ej-ZiZ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FpJ-CT-yML" customClass="VideoView" customModule="FacebookNewFeeds" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Da4-3K-OT1" firstAttribute="bottom" secondItem="FpJ-CT-yML" secondAttribute="bottom" id="Hzj-HR-olJ"/>
+                            <constraint firstItem="Da4-3K-OT1" firstAttribute="trailing" secondItem="FpJ-CT-yML" secondAttribute="trailing" id="Ypo-aq-kiY"/>
+                            <constraint firstItem="FpJ-CT-yML" firstAttribute="top" secondItem="Da4-3K-OT1" secondAttribute="top" id="dMV-bq-Usm"/>
+                            <constraint firstItem="FpJ-CT-yML" firstAttribute="leading" secondItem="Da4-3K-OT1" secondAttribute="leading" id="uFb-QL-H6g"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Da4-3K-OT1"/>
+                    </view>
+                    <connections>
+                        <outlet property="videoView" destination="FpJ-CT-yML" id="RwS-bm-SwD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V5j-LT-NrB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1705" y="-116"/>
         </scene>
         <!--NewFeeds-->
         <scene sceneID="nt4-Qc-5ZL">

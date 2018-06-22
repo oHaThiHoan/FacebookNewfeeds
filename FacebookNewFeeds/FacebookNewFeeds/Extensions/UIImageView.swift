@@ -13,6 +13,7 @@ extension UIImageView {
 
     func setImageFromStringURL(stringURL: String) {
         if let url = URL(string: stringURL) {
+            sd_setShowActivityIndicatorView(true)
             sd_setImage(with: url)
         }
     }

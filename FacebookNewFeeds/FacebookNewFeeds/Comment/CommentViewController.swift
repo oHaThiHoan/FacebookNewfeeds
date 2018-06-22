@@ -63,6 +63,8 @@ class CommentViewController: UIViewController {
         commentTableView.delegate = self
         commentTableView.dataSource = self
         reactionButton.delegate = self
+        reactionButton.alignment = .bottomRight
+        reactionButton.parentView = view
         commentTableView.register(UINib(nibName: Constants.commentCellNibName, bundle: nil),
             forCellReuseIdentifier: Constants.commentCellIdentifier)
         commentTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
