@@ -22,10 +22,6 @@ private struct Constants {
     public static let colorButtonSend: UIColor = .blue
     public static let colorButtonReact: UIColor = .blue
     public static let colorButtonUnReact: UIColor = .lightGray
-    public static let commentCellNibName = "CommentTableViewCell"
-    public static let commentCellIdentifier = "CommentTableViewCell"
-    public static let loadMoreTableViewCellNibName = "LoadMoreCommentTableViewCell"
-    public static let loadMoreTableViewCellIdentifier = "LoadMoreCommentTableViewCell"
     public static let numberCommentShow = 10
     public static let plusHeightOfTextView: CGFloat = 32
 }
@@ -65,10 +61,8 @@ class CommentViewController: UIViewController {
         reactionButton.delegate = self
         reactionButton.alignment = .bottomRight
         reactionButton.parentView = view
-        commentTableView.register(UINib(nibName: Constants.commentCellNibName, bundle: nil),
-            forCellReuseIdentifier: Constants.commentCellIdentifier)
-        commentTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
-            forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
+        commentTableView.register(nibName: CommentTableViewCell.self)
+        commentTableView.register(nibName: LoadMoreCommentTableViewCell.self)
         let spinner = UIViewController.displaySpinner(onView: commentView)
         QueryService.get(url: Url.commentUrl, success: { (response) in
             guard let responseCommentData = response["comments"] as? [[String: Any]] else {
@@ -183,11 +177,7 @@ extension CommentViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.commentCellIdentifier,
-            for: indexPath) as? CommentTableViewCell else {
-                return UITableViewCell()
-        }
-
+        let cell = tableView.dequeueReusableCell(CommentTableViewCell.self)
         cell.setContent(commentModel: commentTempArray[indexPath.row])
         return cell
     }
@@ -197,10 +187,7 @@ extension CommentViewController: UITableViewDataSource {
 extension CommentViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let footerView = tableView.dequeueReusableHeaderFooterView(
-            withIdentifier: Constants.loadMoreTableViewCellIdentifier) as? LoadMoreCommentTableViewCell else {
-                return UITableViewHeaderFooterView()
-        }
+        let footerView = tableView.dequeueReusableCell(LoadMoreCommentTableViewCell.self)
         footerView.delegate = self
         return footerView
     }

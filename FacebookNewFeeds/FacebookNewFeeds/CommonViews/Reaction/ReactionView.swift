@@ -25,7 +25,7 @@ enum Aligment {
 }
 
 protocol ReactionViewDelegate: class {
-    func selectedReaction(reactionType: String)
+    func selectedReaction(reactionType: String, startPoint: CGPoint, endPoint: CGPoint, image: UIImage)
     func removeReactionView()
 }
 
@@ -38,6 +38,7 @@ class ReactionView: UIView {
     var alignment = Aligment.topLeft
     var reactions: [String] = [ReactionType.like, ReactionType.love, ReactionType.wow, ReactionType.sad,
                                ReactionType.angry, ReactionType.haha]
+    var position: CGPoint = .zero
 
     init(view: UIView, alignment: Aligment, position: CGPoint) {
         super.init(frame: view.frame)
@@ -61,6 +62,7 @@ class ReactionView: UIView {
                            width: width, height: height)
         }
         reactionView.changeFrame(frame: frame)
+        self.position = position
     }
 
     override init(frame: CGRect) {
@@ -111,7 +113,14 @@ class ReactionView: UIView {
             button.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewDefault,
                 y: CommonConstants.scaleViewDefault)
         }, completion: { (_) in
-            self.delegate?.selectedReaction(reactionType: self.reactions[button.tag])
+            let xPosition = self.reactionView.frame.origin.x +
+                self.reactionView.frame.width * CGFloat(button.tag) / CGFloat(self.reactions.count)
+            guard let imageView = button.imageView, let image = imageView.image else {
+                return
+            }
+            self.delegate?.selectedReaction(reactionType: self.reactions[button.tag],
+                startPoint: CGPoint(x: xPosition, y: self.reactionView.frame.origin.y),
+                endPoint: self.position, image: image)
             self.removeAnimate()
         })
     }

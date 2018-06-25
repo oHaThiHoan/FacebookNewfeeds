@@ -23,12 +23,11 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var heightTableViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var infoTableView: UITableView!
     @IBOutlet weak var heightInfoTableViewConstraint: NSLayoutConstraint!
-    @IBOutlet weak var searchTextField: UISearchTextField! {
+    @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
-            searchTextField.attribute = AttributeTextField(block: { (attribute) in
-                attribute.placeHolderColor = CommonConstants.colorTextFieldPlaceHolder
-                attribute.placeHolderText = "Search"
-            })
+            searchBar.update(textFieldPlaceHolder: "Search",
+                             textFieldBackground: CommonConstants.colorSearchBarBackground,
+                             textFieldColor: CommonConstants.colorTextFieldPlaceHolder)
         }
     }
     @IBOutlet weak var backImageView: UIImageView!

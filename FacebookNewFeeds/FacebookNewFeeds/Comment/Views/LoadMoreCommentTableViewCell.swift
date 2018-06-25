@@ -12,7 +12,7 @@ protocol LoadMoreCommentDelegate: class {
     func loadMoreAction(view: LoadMoreCommentTableViewCell)
 }
 
-class LoadMoreCommentTableViewCell: UITableViewHeaderFooterView {
+class LoadMoreCommentTableViewCell: UITableViewHeaderFooterView, ReusableView {
 
     @IBOutlet weak var loadMoreLabel: UILabel!
     weak var delegate: LoadMoreCommentDelegate?

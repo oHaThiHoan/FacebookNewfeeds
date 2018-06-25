@@ -10,7 +10,7 @@ import UIKit
 
 public struct CommonConstants {
     public static let normalFontSize: CGFloat = 15
-    public static let colorSearchBarBackground = "#2E4780"
+    public static let colorSearchBarBackground = UIColor(hexString: "#2E4780")
     public static let colorTextFieldPlaceHolder: UIColor = .white
     public static let timeDurationAnimate = 0.25
     public static let scaleViewAnimate: CGFloat = 1.3

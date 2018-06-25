@@ -11,7 +11,7 @@ import UIKit
 private struct Constants {
     public static let cornerCommentView: CGFloat = 10
 }
-class CommentTableViewCell: UITableViewCell {
+class CommentTableViewCell: UITableViewCell, ReusableView {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var commentView: UIView!

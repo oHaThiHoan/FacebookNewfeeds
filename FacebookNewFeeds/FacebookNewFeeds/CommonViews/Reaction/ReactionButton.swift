@@ -70,10 +70,10 @@ class ReactionButton: UIView {
             isSelected = true
             reactionType = ReactionType.like
             image.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewAnimate,
-                y: CommonConstants.scaleViewAnimate)
+                                                y: CommonConstants.scaleViewAnimate)
             UIView.animate(withDuration: CommonConstants.timeDurationAnimate, animations: {
                 self.image.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewDefault,
-                    y: CommonConstants.scaleViewDefault)
+                                                         y: CommonConstants.scaleViewDefault)
             })
         }
         self.delegate?.changeValue()
@@ -99,19 +99,25 @@ extension ReactionButton: ReactionViewDelegate {
         isShowReactionView = false
     }
 
-    func selectedReaction(reactionType: String) {
-        self.reactionType = reactionType
-        image.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewAnimate,
-            y: CommonConstants.scaleViewAnimate)
-        UIView.animate(withDuration: CommonConstants.timeDurationAnimate, animations: {
-            self.image.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewDefault,
-                y: CommonConstants.scaleViewDefault)
-        }, completion: { (finish) in
-            if finish {
-                self.isSelected = true
-                self.delegate?.changeValue()
-            }
-        })
+    func selectedReaction(reactionType: String, startPoint: CGPoint, endPoint: CGPoint, image: UIImage) {
+        let animateImage = AnimateImageView(image: image)
+        animateImage.frame = CGRect(x: endPoint.x, y: endPoint.y, width: 20, height: 20)
+        animateImage.didStopAnimate = {
+            animateImage.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewAnimate,
+                                                y: CommonConstants.scaleViewAnimate)
+            UIView.animate(withDuration: CommonConstants.timeDurationAnimate, animations: {
+                self.image.transform = CGAffineTransform(scaleX: CommonConstants.scaleViewDefault,
+                                                         y: CommonConstants.scaleViewDefault)
+            }, completion: { (finish) in
+                if finish {
+                    self.reactionType = reactionType
+                    self.isSelected = true
+                    self.delegate?.changeValue()
+                }
+            })
+        }
+        self.parentView?.addSubview(animateImage)
+        animateImage.moveCurve(startPoint: startPoint, endPoint: endPoint)
     }
 
 }

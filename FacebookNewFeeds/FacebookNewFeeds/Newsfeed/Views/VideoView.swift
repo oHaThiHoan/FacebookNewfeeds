@@ -38,7 +38,7 @@ class VideoView: UIView {
 
     override func layoutSublayers(of layer: CALayer) {
         super.layoutSublayers(of: layer)
-        playerLayer?.frame = bounds
+        self.playerLayer?.frame = self.bounds
     }
 
     func configure(url: String) {
@@ -49,12 +49,11 @@ class VideoView: UIView {
                 self.player = AVPlayer(playerItem: playerItem)
                 self.playerLayer = AVPlayerLayer(player: self.player)
                 self.playerLayer?.videoGravity = .resizeAspectFill
-                self.playerLayer?.frame = self.bounds
                 self.observation = playerItem.observe(\AVPlayerItem.playbackLikelyToKeepUp, options: [.new]) { _, _ in
                     if let spinner = self.spinner {
                         UIViewController.removeSpinner(spinner: spinner)
                     }
-                    self.pauseImageView.isHidden = false
+                    self.play()
                 }
                 DispatchQueue.main.async {
                     if let playerLayer = self.playerLayer {
@@ -82,6 +81,7 @@ class VideoView: UIView {
     func stop() {
         player?.pause()
         player?.seek(to: kCMTimeZero)
+        pauseImageView.isHidden = false
     }
 
     @objc func reachTheEndOfTheVideo(_ notification: Notification) {
@@ -90,7 +90,7 @@ class VideoView: UIView {
             player?.seek(to: kCMTimeZero)
             player?.play()
         } else {
-            pauseImageView.isHidden = false
+            stop()
         }
     }
 

@@ -13,7 +13,7 @@ public struct FileType {
     public static let image = "image"
 }
 
-class AttactImage: NSObject {
+class AttachView: NSObject {
     var width = 0.0
     var height = 0.0
     var ratio = 0.0
@@ -21,16 +21,18 @@ class AttactImage: NSObject {
     var itemView = UIView()
     var url: String?
 
-    init(attachModel: AttachImageModel) {
+    init(attachModel: AttachModel, text: String = "", action: @escaping () -> Void) {
         super.init()
         self.url = attachModel.url
         let fileType = attachModel.type
-        if FileType.image == fileType {
-            let itemView = UIImageView()
+        if FileType.image == fileType,
+            let itemView = UINib(nibName: "PhotoView", bundle: nil).instantiate(withOwner: nil, options: nil).first
+                as? PhotoView {
             self.itemView = itemView
-            itemView.setImageFromStringURL(stringURL: attachModel.url)
-            itemView.contentMode = .scaleAspectFill
-            itemView.layer.masksToBounds = true
+            itemView.configure(url: attachModel.url, text: text)
+            itemView.actionOnPhoto = {
+                action()
+            }
         } else if FileType.video == fileType,
             let itemView = UINib(nibName: "VideoView", bundle: nil).instantiate(withOwner: nil, options: nil).first
             as? VideoView {

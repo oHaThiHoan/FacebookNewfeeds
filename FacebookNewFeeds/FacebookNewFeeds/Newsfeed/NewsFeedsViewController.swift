@@ -9,12 +9,7 @@
 import UIKit
 
 private struct Constants {
-    public static let friendCollectionViewCellNibName = "FriendCollectionViewCell"
-    public static let friendCollectionViewCellIdentifier = "FriendCollectionViewCell"
-    public static let newsFeedTableViewCellNibName = "NewsFeedTableViewCell"
-    public static let newsFeedTableViewCellIdentifier = "NewsFeedTableViewCell"
-    public static let loadMoreTableViewCellNibName = "LoadMoreTableViewCell"
-    public static let loadMoreTableViewCellIdentifier = "LoadMoreTableViewCell"
+    public static let photoShowViewControllerIdentifier = "PhotoShowViewController"
     public static let heightLoadMoreCell: CGFloat = 44
     public static let profileViewControllerIdentifier = "ProfileViewController"
     public static let numberNewsFeedShow = 10
@@ -33,12 +28,11 @@ class NewsFeedsViewController: UIViewController {
     @IBOutlet weak var newsFeedTableView: UITableView!
     @IBOutlet weak var heightOfTableView: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var searchTextField: UISearchTextField! {
+    @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
-            searchTextField.attribute = AttributeTextField(block: { (attribute) in
-                attribute.placeHolderText = "Search"
-                attribute.placeHolderColor = CommonConstants.colorTextFieldPlaceHolder
-            })
+            searchBar.update(textFieldPlaceHolder: "Search",
+                             textFieldBackground: CommonConstants.colorSearchBarBackground,
+                             textFieldColor: CommonConstants.colorTextFieldPlaceHolder)
         }
     }
     var feedsArray: [FeedModel] = []
@@ -55,17 +49,19 @@ class NewsFeedsViewController: UIViewController {
         friendsCollectionView.contentInset = UIEdgeInsets(top: Constants.collectionViewTopInset,
             left: Constants.collectionViewLeftInset, bottom: Constants.collectionViewBottomInset,
             right: Constants.collectionViewRightInset)
-        friendsCollectionView.register(UINib(nibName: Constants.friendCollectionViewCellNibName, bundle: nil),
-            forCellWithReuseIdentifier: Constants.friendCollectionViewCellIdentifier)
+        friendsCollectionView.register(nibName: FriendCollectionViewCell.self)
         newsFeedTableView.dataSource = self
         newsFeedTableView.delegate = self
         scrollView.delegate = self
-        newsFeedTableView.register(UINib(nibName: Constants.newsFeedTableViewCellNibName, bundle: nil),
-            forCellReuseIdentifier: Constants.newsFeedTableViewCellIdentifier)
-        newsFeedTableView.register(UINib(nibName: Constants.loadMoreTableViewCellNibName, bundle: nil),
-            forHeaderFooterViewReuseIdentifier: Constants.loadMoreTableViewCellIdentifier)
+        newsFeedTableView.register(nibName: NewsFeedTableViewCell.self)
+        newsFeedTableView.register(nibName: LoadMoreTableViewCell.self)
+        getData()
+    }
+
+    func getData() {
         let spinner = UIViewController.displaySpinner(onView: friendsCollectionView)
         QueryService.get(url: Url.newsFeedUrl, success: { (response) in
+            UIViewController.removeSpinner(spinner: spinner)
             guard let responseFeedData = response["feeds"] as? [[String: Any]] else {
                 return
             }
@@ -89,7 +85,6 @@ class NewsFeedsViewController: UIViewController {
             DispatchQueue.main.async {
                 self.friendsCollectionView.reloadData()
             }
-            UIViewController.removeSpinner(spinner: spinner)
         }, failure: { (_) in
             UIViewController.removeSpinner(spinner: spinner)
         })
@@ -117,7 +112,6 @@ class NewsFeedsViewController: UIViewController {
                 }
             }
         }
-
     }
 
 }
@@ -130,11 +124,7 @@ extension NewsFeedsViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: Constants.friendCollectionViewCellIdentifier,
-            for: indexPath) as? FriendCollectionViewCell else {
-                return UICollectionViewCell()
-        }
+        let cell = collectionView.dequeueReusableCell(FriendCollectionViewCell.self, indexPath)
         cell.setContent(storyModel: storiesArray[indexPath.row])
         return cell
     }
@@ -167,10 +157,7 @@ extension NewsFeedsViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: Constants.newsFeedTableViewCellIdentifier,
-            for: indexPath) as? NewsFeedTableViewCell else {
-                return UITableViewCell()
-        }
+        let cell = tableView.dequeueReusableCell(NewsFeedTableViewCell.self)
         let feedModel = feedsTempArray[indexPath.row]
         cell.setContent(feedModel: feedModel, indexPath: indexPath, view: view)
         cell.delegate = self
@@ -185,9 +172,13 @@ extension NewsFeedsViewController: UITableViewDelegate {
         heightOfTableView.constant = newsFeedTableView.contentSize.height
     }
 
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print("end display: \(indexPath.row)")
+    }
+
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return feedsTempArray.count == feedsArray.count ? UIView(frame: .zero) :
-            tableView.dequeueReusableHeaderFooterView(withIdentifier: Constants.loadMoreTableViewCellIdentifier)
+            tableView.dequeueReusableCell(LoadMoreTableViewCell.self)
     }
 
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -210,8 +201,20 @@ extension NewsFeedsViewController: UITableViewDelegate {
 
 extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
 
-    func clickLikeButton(indexPath: IndexPath, feedModel: FeedModel) {
-        feedsTempArray[indexPath.row] = feedModel
+    func clickLikeButton(indexPath: IndexPath, completed: (Int) -> Void) {
+        let feedModel = feedsTempArray[indexPath.row]
+        guard let cell = newsFeedTableView.cellForRow(at: indexPath) as? NewsFeedTableViewCell else {
+            return
+        }
+        if cell.reactionButton.isSelected {
+            if feedModel.reaction == ReactionType.none {
+                feedModel.reactionCount += 1
+            }
+        } else {
+            feedModel.reactionCount -= 1
+        }
+        feedModel.reaction = cell.reactionButton.reactionType
+        completed(feedModel.reactionCount)
     }
 
     func clickCommentButton(indexPath: IndexPath) {
@@ -227,16 +230,26 @@ extension NewsFeedsViewController: NewsFeedTableViewCellDelegate {
         present(commentViewController, animated: true, completion: nil)
     }
 
-    func tapToAvatar(feedModel: FeedModel) {
+    func tapToAvatar(indexPath: IndexPath) {
         guard let profileViewController = storyboard?.instantiateViewController(
             withIdentifier: Constants.profileViewControllerIdentifier) as? ProfileViewController else {
                 return
         }
         let profileModel = ProfileModel()
+        let feedModel = feedsTempArray[indexPath.row]
         profileModel.avatarUrl = feedModel.avatarURL
         profileModel.fullName = feedModel.fullName
         profileViewController.profileModel = profileModel
         navigationController?.pushViewController(profileViewController, animated: true)
+    }
+
+    func tapOnPhoto(indexPath: IndexPath) {
+        guard let photoShowViewController = storyboard?.instantiateViewController(
+            withIdentifier: Constants.photoShowViewControllerIdentifier) as? PhotoShowViewController else {
+                return
+        }
+        photoShowViewController.feedModel = feedsTempArray[indexPath.row]
+        navigationController?.pushViewController(photoShowViewController, animated: true)
     }
 
 }
@@ -258,7 +271,9 @@ extension NewsFeedsViewController: CommentControllerDelegate {
 
     func dismiss(feedModel: FeedModel, indexPath: IndexPath) {
         feedsTempArray[indexPath.row] = feedModel
-        newsFeedTableView.reloadRows(at: [indexPath], with: .none)
+        if let cell = newsFeedTableView.cellForRow(at: indexPath) as? NewsFeedTableViewCell {
+            cell.updateReactionButton(feedModel: feedModel)
+        }
     }
 
 }

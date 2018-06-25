@@ -18,7 +18,7 @@ class FeedModel: NSObject {
     var reactionCount = 0
     var commentCount = 0
     var sharingCount = 0
-    var feedImages: [AttachImageModel]?
+    var feedImages: [AttachModel]?
     var reaction: String?
 
     override init() {
@@ -50,10 +50,10 @@ class FeedModel: NSObject {
         if let sharingCount = response["sharingCount"] as? Int {
             self.sharingCount = sharingCount
         }
-        if let responseImage = response["feedImages"] as? [[String: String]] {
-            feedImages = [AttachImageModel]()
+        if let responseImage = response["feedImages"] as? [[String: Any]] {
+            feedImages = [AttachModel]()
             for image in responseImage {
-                let attachModel = AttachImageModel(with: image)
+                let attachModel = AttachModel(with: image)
                 feedImages?.append(attachModel)
             }
         }
@@ -62,6 +62,20 @@ class FeedModel: NSObject {
         } else {
             reaction = ReactionType.none
         }
+    }
+    func copy() -> FeedModel {
+        let feedModel = FeedModel()
+        feedModel.fullName = fullName
+        feedModel.avatarURL = avatarURL
+        feedModel.createAt = createAt
+        feedModel.feedContent = feedContent
+        feedModel.visibleMode = visibleMode
+        feedModel.reactionCount = reactionCount
+        feedModel.commentCount = commentCount
+        feedModel.sharingCount = sharingCount
+        feedModel.feedImages = feedImages
+        feedModel.reaction = reaction
+        return feedModel
     }
 
 }

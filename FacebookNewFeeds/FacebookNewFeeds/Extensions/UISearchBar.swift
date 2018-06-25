@@ -10,18 +10,18 @@ import UIKit
 
 extension UISearchBar {
 
-    public convenience init(frame: CGRect, textFieldPlaceHolder: String, textFieldBackground: UIColor,
-                            textFieldColor: UIColor) {
-        self.init(frame: frame)
+    func update(textFieldPlaceHolder: String, textFieldBackground: UIColor, textFieldColor: UIColor) {
         let textFieldInsideSearchBar = value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.tintColor = textFieldColor
         textFieldInsideSearchBar?.textColor = textFieldColor
         textFieldInsideSearchBar?.backgroundColor = textFieldBackground
         textFieldInsideSearchBar?.placeholder = textFieldPlaceHolder
         textFieldInsideSearchBar?.attributedPlaceholder = NSAttributedString(string: textFieldPlaceHolder,
             attributes: [NSAttributedStringKey.foregroundColor: textFieldColor])
-        if  let imageView = textFieldInsideSearchBar?.leftView as? UIImageView {
-            imageView.image = imageView.image?.transform(withNewColor: textFieldColor)
+        if  let leftView = textFieldInsideSearchBar?.leftView as? UIImageView {
+            leftView.image = leftView.image?.transform(withNewColor: textFieldColor)
         }
+        backgroundImage = UIImage()
     }
 
 }

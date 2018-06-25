@@ -15,7 +15,7 @@ private struct Constants {
     public static let imageMaxScale: CGFloat = 1
 }
 
-class FriendCollectionViewCell: UICollectionViewCell {
+class FriendCollectionViewCell: UICollectionViewCell, ReusableView {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var borderView: UIView!

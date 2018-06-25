@@ -8,6 +8,6 @@
 
 import UIKit
 
-class LoadMoreTableViewCell: UITableViewHeaderFooterView {
+class LoadMoreTableViewCell: UITableViewHeaderFooterView, ReusableView {
 
 }
